@@ -5,7 +5,7 @@
 ;;; Code:
 
 
-(defun j-prueba ()
+(defun dopemacs-prueba ()
   (interactive)
   (let ((p (point)))
     (indent-according-to-mode)
@@ -16,22 +16,22 @@
   )
 
 
-(defun j-meta-tab (miarg)
+(defun dopemacs-meta-tab (miarg)
   (interactive)
   (apply (key-binding "\C-[\C-i") miarg)
   )
 
-(defun j-pegar-linea ()
+(defun dopemacs-pegar-linea ()
   (interactive)
   (move-beginning-of-line nil)
   (yank)
   )
 
-(defun j-kill-all-buffers ()
+(defun dopemacs-kill-all-buffers ()
   (interactive)
   (mapc 'kill-buffer (buffer-list)))
 
-(defun j-sudo-edit (&optional arg)
+(defun dopemacs-sudo-edit (&optional arg)
   "Edit currently visited file as root.
 
 With a prefix ARG prompt for a file to visit.
@@ -58,14 +58,14 @@ buffer is not visiting a file."
 ;;         (line-beginning-position 2)))))
 
 
-(defun j-xah-cut-line-or-region ()
+(defun dopemacs-xah-cut-line-or-region ()
   "Cut the current line, or current text selection."
   (interactive)
   (if (use-region-p)
       (kill-region (region-beginning) (region-end))
     (kill-region (line-beginning-position) (line-beginning-position 2)) ) )
 
-(defun j-xah-copy-line-or-region ()
+(defun dopemacs-xah-copy-line-or-region ()
   "Copy current line, or current text selection."
   (interactive)
   (if (use-region-p)
@@ -101,7 +101,7 @@ buffer is not visiting a file."
 
 
 
-(defun j-toggle-window-split ()
+(defun dopemacs-toggle-window-split ()
   (interactive)
   (if (>= (count-windows) 2)
       (let* ((this-win-buffer (window-buffer))
@@ -126,80 +126,78 @@ buffer is not visiting a file."
           (select-window first-win)
           (if this-win-2nd (other-window 1))))))
 
-(defun j-switch-to-buffer-quick ()
+(defun dopemacs-switch-to-buffer-quick ()
   "Switch buffers with no questions asked"
   (interactive)
   (switch-to-buffer nil t))
 
 
-(defun j-toggle-fullscreen ()
+(defun dopemacs-toggle-fullscreen ()
   (interactive)
   (x-send-client-message nil 0 nil "_NET_WM_STATE" 32 '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
   (x-send-client-message nil 0 nil "_NET_WM_STATE" 32 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
   )
 
-(defun j-validar-xml ()
+(defun dopemacs-validar-xml ()
   (interactive)
   (compile  (concat "xmllint --noout --schema " (ido-read-file-name "XSD: ") " " (buffer-file-name)))
   )
 
-(defun j-generar-tags ()
+(defun dopemacs-generar-tags ()
   (interactive)
   (shell-command  (concat "cd " (ido-read-directory-name "Root dir: ") " && ctags-exuberant -R -e " ))
   )
 
-(defun j-formatear-xml ()
+(defun dopemacs-formatear-xml ()
   (interactive)
   (shell-command-on-region (point-min)(point-max) "xmllint --format -" (current-buffer) t)
   )
 
 
-(defun j-file-name-without-tramp (filename)
+(defun dopemacs-file-name-without-tramp (filename)
   (if (file-remote-p filename)
       (tramp-file-name-localname (tramp-dissect-file-name filename))
     (filename)))
 
-(defun j-jshint ()
+(defun dopemacs-jshint ()
   (interactive)
-  (let ((filename (j-file-name-without-tramp(buffer-file-name))))
+  (let ((filename (dopemacs-file-name-without-tramp(buffer-file-name))))
     (compile (concat "cd " temporary-file-directory " && jshint --extract=always " filename))))
 
 
 
-(defun j-md5 ()
+(defun dopemacs-md5 ()
   (interactive)
   (shell-command (concat "md5sum " (thing-at-point 'filename)))
   )
 
-(defun j-unir-lineas ()
+(defun dopemacs-unir-lineas ()
   (interactive)
   (next-line)
   (join-line)
   )
 
-(defun j-ecb-toggle ()
-  )
 
-(defun j-copiar-linea (arg)
+(defun dopemacs-copiar-linea (arg)
   "Copy lines (as many as prefix argument) in the kill ring"
   (interactive "p")
   (kill-ring-save (line-beginning-position)
                   (line-beginning-position (+ 1 arg)))
   )
 
-(defun j-codesearch-at-point ()
+(defun dopemacs-codesearch-at-point ()
   "Searches current function in Google Code Search"
   (interactive)
   (browse-url (concat "http://www.google.com/codesearch?q=" (current-word)))
   )
 
-(defun j-pidof (process)
+(defun dopemacs-pidof (process)
   (interactive "sProcess: ")
   (shell-command (concat "pidof " process) t)
   )
 
 
-(defun j-recentf-ido-find-file ()
+(defun dopemacs-recentf-ido-find-file ()
   "Find a recent file using Ido."
   (interactive)
   (let ((file (ido-completing-read "Choose recent file: " recentf-list nil t)))
@@ -208,7 +206,7 @@ buffer is not visiting a file."
 
 
 
-(defun j-nxml-where ()
+(defun dopemacs-nxml-where ()
   "Display the hierarchy of XML elements the point is on as a path."
   (interactive)
   (let ((path nil))
@@ -223,17 +221,17 @@ buffer is not visiting a file."
           (setq path (cons (xmltok-start-tag-local-name) path)))
         (setq header-line-format (format "/%s" (mapconcat 'identity path "/")))))))
 
-(defun j-pdb-breakpoint ()
+(defun dopemacs-pdb-breakpoint ()
   (interactive)
   (insert "import pdb; pdb.set_trace()")
   )
 
-(defun j-pdb-aliases ()
+(defun dopemacs-pdb-aliases ()
   (interactive)
   (insert "alias pi for key,value in %1.__dict__.items(): print \"%1.%s = %s\" % (key,value)")
   )
 
-(defun j-mi-split-window (window)
+(defun dopemacs-mi-split-window (window)
   (if (eq (buffer-name (window-buffer (window))) "*compilation*")
       (with-selected-window window (split-window-vertically))
     (with-selected-window window (split-window-sensibly))
@@ -241,7 +239,7 @@ buffer is not visiting a file."
   )
 
 
-(defun j-grunt ()
+(defun dopemacs-grunt ()
   "Run grunt"
   (interactive)
   (let* ((grunt-buffer (get-buffer-create "*grunt*"))
@@ -256,7 +254,7 @@ buffer is not visiting a file."
 
 
                                         ; save the current macro as reusable function.
-(defun j-save-current-kbd-macro-to-dot-emacs (name)
+(defun dopemacs-save-current-kbd-macro-to-dot-emacs (name)
   "Save the current macro as named function definition inside
 your initialization file so you can reuse it anytime in the
 future."
@@ -271,12 +269,12 @@ future."
 
 
 
-(defun j-kill-this-buffer () 
+(defun dopemacs-kill-this-buffer () 
   (interactive) 
   (kill-buffer (current-buffer)))
                                         ; colored shell commands via C-!
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-(defun j-babcore-shell-execute(cmd)
+(defun dopemacs-babcore-shell-execute(cmd)
   "Execute a shell command in an interactive shell buffer."
   (interactive "sShell command: ")
   (shell (get-buffer-create "*shell-commands-buf*"))
@@ -311,7 +309,7 @@ finding any suitable directory, it returns it instead of `to'"
                             fun
                             if-nil))))
 
-(defun j-find-file-in-repo ()
+(defun dopemacs-find-file-in-repo ()
   (interactive)
   (let* ((git-root (rgc-find-git-root))
          (ido-enable-regexp nil)
@@ -324,10 +322,10 @@ finding any suitable directory, it returns it instead of `to'"
                        (ido-completing-read "File in repo: " repo-files t t)))))
 
 
-(defun j-backward-kill-line (arg)
+(defun dopemacs-backward-kill-line (arg)
   "Kill ARG lines backward."
   (interactive "p")
   (kill-line (- 1 arg)))
 
-(provide 'j-my-elisp)
-;;; j-my-elisp.el ends here
+(provide 'dopemacs-elisp)
+;;; dopemacs-elisp.el ends here

@@ -1,7 +1,7 @@
 ;;; init.el --- Initialization
 ;;; -*- coding: utf-8 -*-
 
-;; PAQUETES :
+;; PACKAGES :
 ;; ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -126,7 +126,6 @@
  '(c-max-one-liner-length 100)
  '(c-report-syntactic-errors t)
  '(canlock-password "339da088f721539f5d6ab06b3b2dcf98e112f3ad")
- '(column-number-mode nil)
  '(comint-buffer-maximum-size 10240)
  '(comint-move-point-for-output t)
  '(compilation-ask-about-save nil)
@@ -188,7 +187,6 @@
  '(linum-format "%d ")
  '(magit-use-overlays nil)
  '(make-backup-files t)
- '(menu-bar-mode t)
  '(mk-proj-use-ido-selection t)
  '(mouse-avoidance-mode (quote banish) nil (avoid))
  '(next-error-recenter (quote (4)))
@@ -197,7 +195,7 @@
  '(nxml-sexp-element-flag t)
  '(nxml-slash-auto-complete-flag t)
  '(org-agenda-todo-list-sublevels nil)
- '(org-default-notes-file "~/.notas.org")
+ '(org-default-notes-file "~/.notes.org")
  '(org-todo-keywords (quote ((sequence "TODO" "|" "DISCARDED" "DELEGATED" "DONE"))))
  '(ourcomments-ido-ctrl-tab t)
  '(proced-auto-update-interval 1)
@@ -210,7 +208,6 @@
  '(recentf-max-saved-items 1000)
  '(recentf-mode t)
  '(remember-data-file "~/.agenda.org")
- '(safe-local-variable-values (quote ((ack-and-a-half-arguments quote ("--ignore-dir=static/vendor --ignore-dir=static/bower_components")))))
  '(save-place t nil (saveplace))
  '(savehist-mode t nil (savehist))
  '(scroll-bar-mode nil)
@@ -250,7 +247,7 @@
  '(w3m-use-cookies t)
  '(web-mode-code-indent-offset 4)
  '(web-mode-disable-auto-pairing t)
- '(wget-download-directory "~/Descargas")
+ '(wget-download-directory "~/Downloads")
  '(whitespace-style (quote (space-before-tab indentation space-after-tab)))
  '(winner-mode t nil (winner))
  '(x-select-enable-clipboard t))
@@ -260,7 +257,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Ubuntu Mono" :foundry "unknown" :slant normal :weight normal :height 113 :width normal))))
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 98 :width normal))))
  '(ecb-default-general-face ((t (:height 0.9))) t)
  '(idle-highlight ((t (:underline t)))))
 
@@ -318,12 +315,11 @@
                                                                               ("%b – Dir:  " default-directory)))))))
 
 
-(require 'j-my-elisp)
+(require 'dopemacs-elisp)
 
 ;; (delete-file tramp-persistency-file-name) ;; para que no cachee mierdas
 
 
-;; Deshabilitar version control cuando uso tramp
 ;; (setq vc-ignore-dir-regexp
 ;;                 (format "\\(%s\\)\\|\\(%s\\)"
 ;;                         vc-ignore-dir-regexp
@@ -341,21 +337,9 @@
 ;; ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-(defconst j-operadores
-  '("+" "+=" "[]" "=" "&" "&=" "<<" "<<="
-    "~" "|" "|=" ">>" ">>=" ">>>" ">>>="
-    "^" "^=" "/*" "*/" "," "?:" "--" "/"
-    "/=" "." "==" ">" ">=" "++" "!=" "<>"
-    "<" "<=" "//" "&&" "!" "||" "%" "%="
-    "*" "*=" "{}" "()" "===" "!==" "\""
-    "-" "-=" ":"))
 
 
-(defun j-anyadir-operadores()
-  (font-lock-add-keywords nil '(((regexp-opt j-operadores) . 'font-lock-warning-face ))   t))
-
-
-(defun j-prog-mode-hook ()
+(defun dopemacs-prog-mode-hook ()
   (yas-minor-mode)
   (fic-ext-mode)
   (modify-syntax-entry ?_ "w")
@@ -365,19 +349,18 @@
   (font-lock-mode)
   ;; (guess-style-guess-all)
   (linum-mode)
-  (local-set-key "\C-j"  'j-unir-lineas)
-  (local-set-key "\C-t"  'j-copiar-linea)
+  (local-set-key "\C-j"  'dopemacs-unir-lineas)
+  (local-set-key "\C-t"  'dopemacs-copiar-linea)
   (local-set-key (kbd "RET")  'newline-and-indent)
   (idle-highlight)
   (whitespace-mode)
   (volatile-highlights-mode)
   ;; (smart-tab-mode)
-  ;; (j-anyadir-operadores)
   )
 
 
 ;; el cogollo del meollo:
-(add-hook 'prog-mode-hook 'j-prog-mode-hook)
+(add-hook 'prog-mode-hook 'dopemacs-prog-mode-hook)
 
 (require 'jquery-doc)
 ;; (add-hook 'python-mode-hook 'jedi:setup)
@@ -395,7 +378,7 @@
 
 
 
-;; ASOCIACIONES :
+;; ASSOCIATIONS :
 ;; ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 (add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode))
@@ -415,7 +398,7 @@
 
 
 
-;; TECLAS:
+;; KEYBINDINGS:
 ;; ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 ;; (ffap-bindings)
@@ -433,9 +416,9 @@
 (global-set-key (kbd "<C-tab>") 'iflipb-next-buffer)
 (global-set-key (kbd "<C-S-iso-lefttab>") 'iflipb-previous-buffer)
 
-(global-set-key (kbd "M-w") 'j-xah-copy-line-or-region)
-(global-set-key (kbd "C-w") 'j-xah-cut-line-or-region)
-(global-set-key (kbd "M-k") 'j-kill-this-buffer)
+(global-set-key (kbd "M-w") 'dopemacs-xah-copy-line-or-region)
+(global-set-key (kbd "C-w") 'dopemacs-xah-cut-line-or-region)
+(global-set-key (kbd "M-k") 'dopemacs-kill-this-buffer)
 
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
@@ -446,7 +429,7 @@
 ;; (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key " " (quote hippie-expand)) ;; M-TAB
 (global-set-key "\C-cb" 'browse-url)
-(global-set-key "\C-cp" 'j-find-file-in-repo)
+(global-set-key "\C-cp" 'dopemacs-find-file-in-repo)
 (global-set-key "\C-cg" 'rgrep)
 (global-set-key "\C-ch" 'helm-mini)
 (global-set-key "\C-cj" 'dired-at-point)
@@ -456,18 +439,18 @@
 (global-set-key "\C-cs" 'svn-status)
 (global-set-key "\C-ct" 'toggle-truncate-lines)
 (global-set-key "\C-cv" 'eval-buffer)
-(global-set-key "\C-cw" 'j-toggle-window-split)
-(global-set-key "\C-cw" 'j-toggle-window-split)
-(global-set-key "\C-cf" 'j-recentf-ido-find-file)
+(global-set-key "\C-cw" 'dopemacs-toggle-window-split)
+(global-set-key "\C-cw" 'dopemacs-toggle-window-split)
+(global-set-key "\C-cf" 'dopemacs-recentf-ido-find-file)
 (global-set-key "\M-o" 'other-window)
-;; (global-set-key (kbd "C-!") 'j-babcore-shell-execute)
-(global-set-key (kbd "<C-M-backspace>") 'j-backward-kill-line)
+;; (global-set-key (kbd "C-!") 'dopemacs-babcore-shell-execute)
+(global-set-key (kbd "<C-M-backspace>") 'dopemacs-backward-kill-line)
 
 ;; (global-set-key (kbd "M-ç") "}")
 ;; (global-set-key "\C-ch" 'idle-highlight)
 (global-set-key "\C-cl" 'package-list-packages-no-fetch)
 
-;;(global-set-key (kbd "<C-tab>") 'j-switch-to-buffer-quick)
+;;(global-set-key (kbd "<C-tab>") 'dopemacs-switch-to-buffer-quick)
 (global-set-key (kbd "<f6>") '(lambda () (interactive) (kill-buffer nil)))
 (global-set-key (kbd "<f7>") 'ecb-minor-mode)
 (global-set-key (kbd "<f8>") 'sunrise)
@@ -570,7 +553,7 @@
   (sp-local-pair "(" nil :bind "C-("))
 
 
-;; INICIALIZACIONES
+;; INITIALIZATIONS
 ;; ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 (load "server")
@@ -578,7 +561,7 @@
 
 
 (cond ((eq window-system 'x)
-       (j-toggle-fullscreen)))
+       (dopemacs-toggle-fullscreen)))
 
 
 ;; (helm-mode)

@@ -1,7 +1,7 @@
 dopemacs
 ========
 
-Emacs configuration that aims to add lots of non-intrusive useful features while keeping traditional Emacs keybindings and workflow.
+Emacs configuration that aims to add lots of enabled-by-default, non-intrusive useful features while keeping traditional Emacs keybindings and workflow.
 
 Installation:
 
