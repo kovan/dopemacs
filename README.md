@@ -1,3 +1,5 @@
+![Image](../blob/master/dopemacs.png?raw=true)
+
 dopemacs
 ========
 

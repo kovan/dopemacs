@@ -125,7 +125,6 @@
  '(c-default-style (quote ((c-mode . "linux") (c++-mode . "linux") (java-mode . "java") (awk-mode . "awk") (other . "linux"))))
  '(c-max-one-liner-length 100)
  '(c-report-syntactic-errors t)
- '(canlock-password "339da088f721539f5d6ab06b3b2dcf98e112f3ad")
  '(comint-buffer-maximum-size 10240)
  '(comint-move-point-for-output t)
  '(compilation-ask-about-save nil)
@@ -135,7 +134,6 @@
  '(compilation-window-height 30)
  '(confirm-kill-emacs nil)
  '(custom-enabled-themes (quote (zenburn)))
- '(custom-safe-themes (quote ("16248150e4336572ff4aa21321015d37c3744a9eb243fbd1e934b594ff9cf394" "11d069fbfb0510e2b32a5787e26b762898c7e480364cbc0779fe841662e4cf5d" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "e16a771a13a202ee6e276d06098bc77f008b73bbac4d526f160faa2d76c1dd0e" default)))
  '(debug-on-error nil)
  '(delete-old-versions t)
  '(delete-selection-mode t)
@@ -147,14 +145,13 @@
  '(ecb-options-version "2.40")
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
  '(ecb-source-file-regexps (quote ((".*" ("\\(^\\(\\.\\|#\\)\\|\\(~$\\|\\.\\(elc\\|obj\\|o\\|class\\|lib\\|dll\\|a\\|so\\|cache\\|pyc\\)$\\)\\)") ("^\\.\\(emacs\\|gnus\\)$")))))
- '(ecb-source-path (quote (("/home/k/sandbox" "sandbox") ("/home/k" "home") ("/" "/"))))
+ '(ecb-source-path (quote (("/" "/"))))
  '(ecb-tip-of-the-day nil)
  '(ecb-windows-width 0.25)
  '(ediff-split-window-function (quote split-window-horizontally))
  '(electric-indent-mode t)
  '(elpy-rpc-backend "jedi")
  '(enable-remote-dir-locals t)
- '(erc-nick "paseante")
  '(eval-expression-debug-on-error nil)
  '(flx-ido-mode t)
  '(flymake-run-in-place nil)
@@ -196,7 +193,6 @@
  '(nxml-slash-auto-complete-flag t)
  '(org-agenda-todo-list-sublevels nil)
  '(org-default-notes-file "~/.notes.org")
- '(org-todo-keywords (quote ((sequence "TODO" "|" "DISCARDED" "DELEGATED" "DONE"))))
  '(ourcomments-ido-ctrl-tab t)
  '(proced-auto-update-interval 1)
  '(projectile-enable-caching t)
@@ -238,7 +234,6 @@
  '(tabkey2-mode t)
  '(tabkey2-show-message-on-enter 2.0)
  '(tool-bar-mode nil)
- '(tramp-default-method "rsync")
  '(tramp-remote-path (quote (tramp-default-remote-path tramp-own-remote-path)))
  '(tramp-verbose 5)
  '(truncate-lines t)
@@ -284,13 +279,11 @@
       kept-new-versions 6
       kept-old-versions 2
       version-control t)       ; use versioned backups
-(setq web-mode-engines-alist '(( "django" . "\\.html$")))
 (setq jedi:complete-on-dot t)                 ; optional
 (require 'smartparens-config)
 (require 'volatile-highlights)
 (volatile-highlights-mode t)
 (require 'move-text)
-
 ;; (require 'smartparens-html)
 
 
@@ -317,7 +310,7 @@
 
 (require 'dopemacs-elisp)
 
-;; (delete-file tramp-persistency-file-name) ;; para que no cachee mierdas
+;; (delete-file tramp-persistency-file-name) ;; prevent caching shit
 
 
 ;; (setq vc-ignore-dir-regexp
@@ -359,7 +352,7 @@
   )
 
 
-;; el cogollo del meollo:
+;; attach main programming modes hook:
 (add-hook 'prog-mode-hook 'dopemacs-prog-mode-hook)
 
 (require 'jquery-doc)
@@ -588,7 +581,5 @@
 
 (provide 'init)
 ;; init.el ends here
-
-
 
 
