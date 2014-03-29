@@ -14,3 +14,4 @@ Requirements:
 - Emacs >= 24
 
 
+You should also check  https://github.com/bbatsov/prelude, a project with similar aims but more mature and a less generic.
