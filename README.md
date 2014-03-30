@@ -15,3 +15,7 @@ Requirements:
 
 
 You should also check  https://github.com/bbatsov/prelude, a project with similar aims but more mature and a less generic.
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/kovan/dopemacs/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
