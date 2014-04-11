@@ -328,7 +328,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "DejaVu Sans" :foundry "unknown" :slant normal :weight normal :height 98 :width normal))))
- '(ecb-default-general-face ((t (:height 0.9)))))
+ '(ecb-default-general-face ((t (:height 0.9))) t)
+ '(highlight-symbol-face ((t (:background "dim gray")))))
 
 
 
@@ -449,7 +450,7 @@
 (add-to-list 'auto-mode-alist '("\\.xsl\\'$" . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.xsd\\'$" . nxml-mode))
 (add-to-list 'auto-mode-alist '("configure\\(\\.in\\)?\\'" . autoconf-mode))
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+;; (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
 (add-to-list 'auto-mode-alist '("\\.zsh$" . sh-mode))
 
@@ -522,8 +523,8 @@
 (global-set-key "\C-cf" 'helm-recentf)
 (global-set-key "\C-cl" 'google-lucky-search)
 (global-set-key "\C-ce" 'package-list-packages-no-fetch) ;; e of ELPA
-(global-set-key "\C-c\C-n" 'highlight-symbol-next)
-(global-set-key "\C-c\C-p" 'highlight-symbol-prev)
+;; (global-set-key "\C-c\C-n" 'highlight-symbol-next)
+;; (global-set-key "\C-c\C-p" 'highlight-symbol-prev)
 (global-set-key "\C-cñ" 'dopemacs-split-window)
 
 
