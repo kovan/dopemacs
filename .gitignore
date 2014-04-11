@@ -9,3 +9,5 @@ auto-save-list/
 tramp
 ac-comphist.dat
 tmp
+/abbrev_defs
+/var/
