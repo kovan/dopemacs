@@ -205,7 +205,6 @@
  '(electric-indent-mode nil)
  '(elpy-rpc-backend "rope")
  '(enable-remote-dir-locals t)
- '(erc-nick "paseante")
  '(eval-expression-debug-on-error nil)
  '(flx-ido-mode t)
  '(flycheck-completion-system nil)
