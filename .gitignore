@@ -12,3 +12,5 @@ tmp
 /abbrev_defs
 /var/
 bookmarks.emacs
+url/
+session.*
