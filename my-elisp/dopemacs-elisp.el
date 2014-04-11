@@ -1,35 +1,13 @@
-;;; Comentary: 
+;;; package --- Summary:
+;; Lisp code for Dopemacs
 
+;;; Commentary: 
+;; Lisp code for Dopemacs
 
 
 ;;; Code:
 
 
-(defun dopemacs-prueba ()
-  (interactive)
-  (let ((p (point)))
-    (indent-according-to-mode)
-    (when (and (= p (point))
-               (not (bolp))
-               (looking-at "\\_>"))
-      (hippie-expand nil)))
-  )
-
-
-(defun dopemacs-meta-tab (miarg)
-  (interactive)
-  (apply (key-binding "\C-[\C-i") miarg)
-  )
-
-(defun dopemacs-pegar-linea ()
-  (interactive)
-  (move-beginning-of-line nil)
-  (yank)
-  )
-
-(defun dopemacs-kill-all-buffers ()
-  (interactive)
-  (mapc 'kill-buffer (buffer-list)))
 
 (defun dopemacs-sudo-edit (&optional arg)
   "Edit currently visited file as root.
@@ -75,32 +53,6 @@ buffer is not visiting a file."
 
 
 
-
-
-(defvar gud-overlay
-  (let* ((ov (make-overlay (point-min) (point-min))))
-    (overlay-put ov 'face 'secondary-selection)
-    ov)
-  "Overlay variable for GUD highlighting.")
-
-(defadvice gud-display-line (after my-gud-highlight act)
-  "Highlight current line."
-  (let* ((ov gud-overlay)
-         (bf (gud-find-file true-file)))
-    (save-excursion
-      (set-buffer bf)
-      (move-overlay ov (line-beginning-position) (line-beginning-position 2)
-                    ;;(move-overlay ov (line-beginning-position) (line-end-position)
-                    (current-buffer)))))
-
-(defun gud-kill-buffer ()
-  (if (eq major-mode 'gud-mode)
-      (delete-overlay gud-overlay)))
-
-(add-hook 'kill-buffer-hook 'gud-kill-buffer)
-
-
-
 (defun dopemacs-toggle-window-split ()
   (interactive)
   (if (>= (count-windows) 2)
@@ -127,7 +79,7 @@ buffer is not visiting a file."
           (if this-win-2nd (other-window 1))))))
 
 (defun dopemacs-switch-to-buffer-quick ()
-  "Switch buffers with no questions asked"
+  "Switch buffers with no questions asked."
   (interactive)
   (switch-to-buffer nil t))
 
@@ -138,17 +90,17 @@ buffer is not visiting a file."
   (x-send-client-message nil 0 nil "_NET_WM_STATE" 32 '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
   )
 
-(defun dopemacs-validar-xml ()
+(defun dopemacs-validate-xml ()
   (interactive)
   (compile  (concat "xmllint --noout --schema " (ido-read-file-name "XSD: ") " " (buffer-file-name)))
   )
 
-(defun dopemacs-generar-tags ()
+(defun dopemacs-generate-tags ()
   (interactive)
   (shell-command  (concat "cd " (ido-read-directory-name "Root dir: ") " && ctags-exuberant -R -e " ))
   )
 
-(defun dopemacs-formatear-xml ()
+(defun dopemacs-format-xml ()
   (interactive)
   (shell-command-on-region (point-min)(point-max) "xmllint --format -" (current-buffer) t)
   )
@@ -169,26 +121,6 @@ buffer is not visiting a file."
 (defun dopemacs-md5 ()
   (interactive)
   (shell-command (concat "md5sum " (thing-at-point 'filename)))
-  )
-
-(defun dopemacs-unir-lineas ()
-  (interactive)
-  (next-line)
-  (join-line)
-  )
-
-
-(defun dopemacs-copiar-linea (arg)
-  "Copy lines (as many as prefix argument) in the kill ring"
-  (interactive "p")
-  (kill-ring-save (line-beginning-position)
-                  (line-beginning-position (+ 1 arg)))
-  )
-
-(defun dopemacs-codesearch-at-point ()
-  "Searches current function in Google Code Search"
-  (interactive)
-  (browse-url (concat "http://www.google.com/codesearch?q=" (current-word)))
   )
 
 (defun dopemacs-pidof (process)
@@ -221,67 +153,31 @@ buffer is not visiting a file."
           (setq path (cons (xmltok-start-tag-local-name) path)))
         (setq header-line-format (format "/%s" (mapconcat 'identity path "/")))))))
 
-(defun dopemacs-pdb-breakpoint ()
+(defun dopemacs-pudb-breakpoint ()
   (interactive)
-  (insert "import pdb; pdb.set_trace()")
-  )
+  (insert "import pudb; pudb.set_trace()"))
+
+(defun dopemacs-ipdb-breakpoint ()
+  (interactive)
+  (insert "import ipdb; ipdb.set_trace()"))
 
 (defun dopemacs-pdb-aliases ()
   (interactive)
-  (insert "alias pi for key,value in %1.__dict__.items(): print \"%1.%s = %s\" % (key,value)")
-  )
-
-(defun dopemacs-mi-split-window (window)
-  (if (eq (buffer-name (window-buffer (window))) "*compilation*")
-      (with-selected-window window (split-window-vertically))
-    (with-selected-window window (split-window-sensibly))
-    )
-  )
+  (insert "alias pi for key,value in %1.__dict__.items(): print \"%1.%s = %s\" % (key,value)"))
 
 
-(defun dopemacs-grunt ()
-  "Run grunt"
-  (interactive)
-  (let* ((grunt-buffer (get-buffer-create "*grunt*"))
-         (result (call-process-shell-command "grunt" nil grunt-buffer t))
-         (output (with-current-buffer grunt-buffer (buffer-string))))
-    (cond ((zerop result)
-           (message "Grunt completed without errors"))
-          (t
-           (message nil)
-           (split-window-vertically)
-           (set-window-buffer (next-window) grunt-buffer)))))
-
-
-                                        ; save the current macro as reusable function.
 (defun dopemacs-save-current-kbd-macro-to-dot-emacs (name)
   "Save the current macro as named function definition inside
 your initialization file so you can reuse it anytime in the
 future."
   (interactive "SSave Macro as: ")
   (name-last-kbd-macro name)
-  (save-excursion 
+  (save-excursion
     (find-file-literally user-init-file)
     (goto-char (point-max))
     (insert "\n\n;; Saved macro\n")
     (insert-kbd-macro name)
     (insert "\n")))
-
-
-
-(defun dopemacs-kill-this-buffer () 
-  (interactive) 
-  (kill-buffer (current-buffer)))
-                                        ; colored shell commands via C-!
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-(defun dopemacs-babcore-shell-execute(cmd)
-  "Execute a shell command in an interactive shell buffer."
-  (interactive "sShell command: ")
-  (shell (get-buffer-create "*shell-commands-buf*"))
-  (process-send-string (get-buffer-process "*shell-commands-buf*") (concat cmd "\n")))
-
-
-
 
 
 
@@ -326,6 +222,18 @@ finding any suitable directory, it returns it instead of `to'"
   "Kill ARG lines backward."
   (interactive "p")
   (kill-line (- 1 arg)))
+
+(defun dopemacs-split-window()
+  "Split the window to see the most recent buffer in the other window.
+Call a second time to restore the original window configuration."
+  (interactive)
+  (if (eq last-command 'dopemacs-split-window)
+      (progn
+        (jump-to-register :dopemacs-split-window)
+        (setq this-command 'dopemacs-unsplit-window))
+    (window-configuration-to-register :dopemacs-split-window)
+    (switch-to-buffer-other-window nil)))
+
 
 (provide 'dopemacs-elisp)
 ;;; dopemacs-elisp.el ends here
