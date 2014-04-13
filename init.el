@@ -213,6 +213,7 @@
  '(erc-nick "paseante")
  '(eval-expression-debug-on-error nil)
  '(flx-ido-mode t)
+ '(flycheck-check-syntax-automatically (quote (save new-line mode-enabled)))
  '(flycheck-completion-system nil)
  '(flymake-run-in-place nil)
  '(global-anzu-mode t)
