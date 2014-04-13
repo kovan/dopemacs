@@ -21,20 +21,6 @@ buffer is not visiting a file."
                          (ido-read-file-name "Find file(as root): ")))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
 
-;; (defadvice kill-ring-save (before slick-copy activate compile)
-;;   "When called interactively with no active region, copy a single line instead."
-;;   (interactive
-;;    (if mark-active ank(list (region-beginning) (region-end))
-;;   (list (line-beginning-position)
-;;         (line-beginning-position 2)))))
-
-;; (defadvice kill-region (before slick-cut activate compile)
-;;   "When called interactively with no active region, kill a single line instead."
-;;   (interactive
-;;    (if mark-active (list (region-beginning) (region-end))
-;;   (list (line-beginning-position)
-;;         (line-beginning-position 2)))))
-
 
 (defun dopemacs-xah-cut-line-or-region ()
   "Cut the current line, or current text selection."
@@ -49,8 +35,6 @@ buffer is not visiting a file."
   (if (use-region-p)
       (kill-ring-save (region-beginning) (region-end))
     (kill-ring-save (line-beginning-position) (line-beginning-position 2)) ) )
-
-
 
 
 (defun dopemacs-toggle-window-split ()
@@ -103,29 +87,6 @@ buffer is not visiting a file."
 (defun dopemacs-format-xml ()
   (interactive)
   (shell-command-on-region (point-min)(point-max) "xmllint --format -" (current-buffer) t)
-  )
-
-
-(defun dopemacs-file-name-without-tramp (filename)
-  (if (file-remote-p filename)
-      (tramp-file-name-localname (tramp-dissect-file-name filename))
-    (filename)))
-
-(defun dopemacs-jshint ()
-  (interactive)
-  (let ((filename (dopemacs-file-name-without-tramp(buffer-file-name))))
-    (compile (concat "cd " temporary-file-directory " && jshint --extract=always " filename))))
-
-
-
-(defun dopemacs-md5 ()
-  (interactive)
-  (shell-command (concat "md5sum " (thing-at-point 'filename)))
-  )
-
-(defun dopemacs-pidof (process)
-  (interactive "sProcess: ")
-  (shell-command (concat "pidof " process) t)
   )
 
 
@@ -217,11 +178,6 @@ finding any suitable directory, it returns it instead of `to'"
     (find-file (concat git-root "/"
                        (ido-completing-read "File in repo: " repo-files t t)))))
 
-
-(defun dopemacs-backward-kill-line (arg)
-  "Kill ARG lines backward."
-  (interactive "p")
-  (kill-line (- 1 arg)))
 
 (defun dopemacs-split-window()
   "Split the window to see the most recent buffer in the other window.

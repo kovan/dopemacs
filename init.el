@@ -15,69 +15,36 @@
 
 (when (>= emacs-major-version 24)
   (setq package-list '(
-					   helm-ag
-					   helm-google
-					   jinja2-mode
-					   smart-mode-line
-					   sunrise-commander
-					   tidy
-					   yasnippet
-					   ;; fixmee
-					   ;; virtualenvwrapper
-					   ag
-					   back-button
-					   buffer-move
-					   company
-					   dart-mode
-					   el-get
-					   elpy
-					   gitconfig-mode
-					   grizzl
-					   groovy-mode
-					   guide-key-tip
-					   helm-ack
-					   helm-chrome
-					   helm-flycheck
-					   helm-git-files
-					   helm-git-grep
-					   helm-google
-					   helm-gtags
-					   helm-pydoc
-					   helm-swoop
-					   helm-themes
-					   highlight-symbol
-					   howdoi
-					   iedit
-					   nlinum
-					   pkgbuild-mode
-					   rainbow-mode
-					   sequential-command
-					   slim-mode
-					   slime
-					   textile-mode
-					   tuareg
-					   w3m
                        ;; ac-js2
                        ;; auto-complete
+                       ;; fixmee
                        ;; rainbow-mode
                        ;; smartrep
+                       ;; virtualenvwrapper
                        ack-and-a-half
+                       ag
                        anzu
                        apache-mode
+                       back-button
                        browse-kill-ring
+                       buffer-move
                        clojure-mode
                        cmake-mode
                        coffee-mode
+                       company
                        csharp-mode
                        csv-nav
                        cycbuf
                        d-mode
+                       dart-mode
                        debian-changelog-mode
                        diff-hl
                        dired+
                        dos
                        ecb
                        editorconfig
+                       el-get
+                       elpy
                        erlang
                        expand-region
                        feature-mode
@@ -87,19 +54,39 @@
                        flycheck
                        free-keys
                        fuzzy
+                       gitconfig-mode
                        go-mode
                        google-this
+                       grizzl
+                       groovy-mode
                        guess-offset
+                       guide-key-tip
                        haml-mode
                        haskell-mode
                        helm
+                       helm-ack
+                       helm-ag
+                       helm-chrome
                        helm-descbinds
+                       helm-flycheck
+                       helm-git-files
+                       helm-git-grep
+                       helm-google
+                       helm-google
+                       helm-gtags
                        helm-projectile
+                       helm-pydoc
+                       helm-swoop
+                       helm-themes
+                       highlight-symbol
+                       howdoi
                        htmlize
                        ido-ubiquitous
                        ido-vertical-mode
+                       iedit
                        iflipb
                        jedi
+                       jinja2-mode
                        jquery-doc
                        js2-mode
                        json-mode
@@ -114,30 +101,43 @@
                        multi-term
                        multiple-cursors
                        nav
+                       nlinum
                        nyan-mode
                        php-mode
+                       pkgbuild-mode
                        popwin
                        powerline
                        projectile
                        rainbow-delimiters
+                       rainbow-mode
                        recentf-ext
                        ruby-mode
                        scala-mode
                        scss-mode
+                       sequential-command
                        skewer-mode
+                       slim-mode
+                       slime
+                       smart-mode-line
                        smartparens
                        smex
                        sr-speedbar
                        stylus-mode
+                       sunrise-commander
                        syslog-mode
+                       textile-mode
+                       tidy
+                       tuareg
                        undo-tree
                        vimrc-mode
                        volatile-highlights
+                       w3m
                        web-mode
                        wgrep
                        whitespace-cleanup-mode
                        windresize
                        yaml-mode
+                       yasnippet
                        zenburn-theme))
   
   (require 'package)
@@ -169,7 +169,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ack-and-a-half-arguments (quote ("--ignore-dir=static/vendor --ignore-dir=static/bower_components")))
  '(ack-and-a-half-executable "ack-grep")
  '(ack-executable (executable-find "ack-grep"))
  '(back-button-mode t)
@@ -178,7 +177,6 @@
  '(c-default-style (quote ((c-mode . "linux") (c++-mode . "linux") (java-mode . "java") (awk-mode . "awk") (other . "linux"))))
  '(c-max-one-liner-length 100)
  '(c-report-syntactic-errors t)
- '(canlock-password "339da088f721539f5d6ab06b3b2dcf98e112f3ad")
  '(comint-buffer-maximum-size 10240)
  '(comint-move-point-for-output t)
  '(company-idle-delay 0.3)
@@ -191,7 +189,6 @@
  '(compilation-window-height 30)
  '(confirm-kill-emacs nil)
  '(custom-enabled-themes (quote (zenburn)))
- '(custom-safe-themes (quote ("a53714de04cd4fdb92ed711ae479f6a1d7d5f093880bfd161467c3f589725453" default)))
  '(debug-on-error nil)
  '(delete-old-versions t)
  '(delete-selection-mode t)
@@ -199,11 +196,10 @@
  '(dired-auto-revert-buffer t)
  '(ecb-add-path-for-not-matching-files (quote (t)))
  '(ecb-layout-name "left13")
- '(ecb-layout-window-sizes (quote (("left13" (ecb-directories-buffer-name 0.12213740458015267 . 0.9833333333333333)) ("left15" (ecb-directories-buffer-name 0.13215859030837004 . 0.6333333333333333) (ecb-methods-buffer-name 0.13215859030837004 . 0.35)) ("left7" (ecb-directories-buffer-name 0.14096916299559473 . 0.5833333333333334) (ecb-history-buffer-name 0.14096916299559473 . 0.15) (ecb-methods-buffer-name 0.14096916299559473 . 0.25)))))
+ '(ecb-layout-window-sizes (quote (("left13" (ecb-directories-buffer-name 0.12213740458015267 . 0.9833333333333333)))))
  '(ecb-options-version "2.40")
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
  '(ecb-source-file-regexps (quote ((".*" ("\\(^\\(\\.\\|#\\)\\|\\(~$\\|\\.\\(elc\\|obj\\|o\\|class\\|lib\\|dll\\|a\\|so\\|cache\\|pyc\\)$\\)\\)") ("^\\.\\(emacs\\|gnus\\)$")))))
- '(ecb-source-path (quote (("/home/k/sandbox" "sandbox") ("/home/k" "home") ("/" "/") ("/home/k/proyectos" "proyectos"))))
  '(ecb-tip-of-the-day nil)
  '(ecb-windows-width 0.25)
  '(ediff-split-window-function (quote split-window-horizontally))
@@ -272,7 +268,6 @@
  '(recentf-max-saved-items 1000)
  '(recentf-mode t)
  '(remember-data-file "~/.agenda.org")
- '(safe-local-variable-values (quote ((ack-and-a-half-arguments "--ignore-dir=static/vendor --ignore-dir=static/bower_components --ignore-dir=log") (web-mode-markup-indent-offset . 2) (web-mode-markup-indent-offset 2) (ack-and-a-half-arguments "--ignore-dir=static/vendor --ignore-dir=static/bower_components") (ack-and-a-half-arguments quote "--ignore-dir=static/vendor --ignore-dir=static/bower_components") (ack-and-a-half-arguments . "--ignore-dir=static/vendor --ignore-dir=static/bower_components") (ack-and-a-half-arguments quote ("--ignore-dir=static/vendor --ignore-dir=static/bower_components")))))
  '(save-interprogram-paste-before-kill nil)
  '(save-place t nil (saveplace))
  '(savehist-additional-variables (quote (kill-ring mark-ring global-mark-ring search-ring regexp-search-ring extended-command-history compile-command)))
@@ -307,7 +302,6 @@
  '(tabkey2-mode t)
  '(tabkey2-show-message-on-enter 2.0)
  '(tool-bar-mode nil)
- '(tramp-default-method "rsync")
  '(tramp-remote-path (quote (tramp-default-remote-path tramp-own-remote-path)))
  '(tramp-verbose 5)
  '(truncate-lines t)
@@ -394,15 +388,12 @@
 	(yas-minor-mode)
 	(modify-syntax-entry ?_ "w")
 	(modify-syntax-entry ?- "w")
-	;; (guess-style-guess-all)
 	(nlinum-mode)
 	(highlight-symbol-mode)
 	(local-set-key "\C-j"  'join-line)
 	(local-set-key (kbd "RET")  'newline-and-indent)
 	(whitespace-mode)
 	(volatile-highlights-mode)
-	;; (which-function-mode)
-    ;; (smart-tab-mode)
 	)
 
 
@@ -420,7 +411,7 @@
 ;; (add-hook 'python-mode-hook 'jedi:setup)
 (add-hook 'web-mode-hook 'jquery-doc-setup)
 ;; (add-hook 'web-mode-hook 'skewer-html-mode)
-(add-hook 'js2-mode-hook 'jquery-doc-setup)
+;; (add-hook 'js2-mode-hook 'jquery-doc-setup)
 ;; (add-hook 'js2-mode-hook 'ac-js2-mode)
 ;; (add-hook 'js2-mode-hook 'skewer-mode)
 ;; (add-hook 'css-mode-hook 'skewer-css-mode)
@@ -450,7 +441,6 @@
 (add-to-list 'auto-mode-alist '("\\.xsl\\'$" . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.xsd\\'$" . nxml-mode))
 (add-to-list 'auto-mode-alist '("configure\\(\\.in\\)?\\'" . autoconf-mode))
-;; (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
 (add-to-list 'auto-mode-alist '("\\.zsh$" . sh-mode))
 
@@ -536,11 +526,6 @@
 ;; (global-set-key (kbd "<f9>") 'gud-cont)
 ;; (global-set-key (kbd "<f11>") 'gud-step)
 ;; (global-set-key (kbd "<f12>") 'gud-next)
-;; (global-set-key "\C-c\C-h" '(lambda () (interactive) (highlight-regexp (thing-at-point 'word))))
-;; (global-set-key (kbd "S-<next>") 'scroll-up)
-;; (global-set-key (kbd "S-<prior>") 'scroll-down)
-;; (global-set-key "\C-ch" 'highlight-symbol-at-point)
-;; (global-set-key "\C-cq" 'highlight-symbol-query-replace)
 
 
 
