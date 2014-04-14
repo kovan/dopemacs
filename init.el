@@ -40,6 +40,7 @@
                        debian-changelog-mode
                        diff-hl
                        dired+
+					   dirtree
                        dos
                        ecb
                        editorconfig
@@ -100,7 +101,6 @@
                        move-text
                        multi-term
                        multiple-cursors
-                       nav
                        nlinum
                        nyan-mode
                        php-mode
@@ -171,6 +171,7 @@
  ;; If there is more than one, they won't work right.
  '(ack-and-a-half-executable "ack-grep")
  '(ack-executable (executable-find "ack-grep"))
+ '(auto-save-default nil)
  '(back-button-mode t)
  '(backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))
  '(c-basic-offset 4)
@@ -190,6 +191,7 @@
  '(confirm-kill-emacs nil)
  '(custom-enabled-themes (quote (zenburn)))
  '(debug-on-error nil)
+ '(delete-by-moving-to-trash t)
  '(delete-old-versions t)
  '(delete-selection-mode t)
  '(develock-auto-enable nil)
@@ -199,7 +201,6 @@
  '(ecb-layout-window-sizes (quote (("left13" (ecb-directories-buffer-name 0.12213740458015267 . 0.9833333333333333)))))
  '(ecb-options-version "2.40")
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
- '(ecb-source-file-regexps (quote ((".*" ("\\(^\\(\\.\\|#\\)\\|\\(~$\\|\\.\\(elc\\|obj\\|o\\|class\\|lib\\|dll\\|a\\|so\\|cache\\|pyc\\)$\\)\\)") ("^\\.\\(emacs\\|gnus\\)$")))))
  '(ecb-tip-of-the-day nil)
  '(ecb-windows-width 0.25)
  '(ediff-split-window-function (quote split-window-horizontally))
@@ -321,8 +322,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "DejaVu Sans" :foundry "unknown" :slant normal :weight normal :height 98 :width normal))))
- '(ecb-default-general-face ((t (:height 0.9))) t)
+ '(default ((t (:family "DejaVu Sans" :foundry "unknown" :slant normal :weight normal :height 100 :width normal))))
+ '(ecb-default-general-face ((t (:height 0.9))))
  '(highlight-symbol-face ((t (:background "dim gray")))))
 
 
@@ -396,15 +397,16 @@
 	(volatile-highlights-mode)
 	)
 
-
 (add-hook 'prog-mode-hook 'dopemacs-prog-mode-hook)
 
-(defun dopemacs-text-mode-hook ()
+
+(defun dopemacs-fixed-width-font-hook ()
 	(set (make-local-variable 'face-remapping-alist)
                    '((default :family "DejaVu Sans Mono")))
 	)
 
-(add-hook 'text-mode-hook 'dopemacs-text-mode-hook)
+(add-hook 'text-mode-hook 'dopemacs-fixed-width-font-hook)
+(add-hook 'dired-mode-hook 'dopemacs-fixed-width-font-hook)
 
 
 (require 'jquery-doc)
@@ -418,7 +420,6 @@
 (add-hook 'json-mode 'flymake-json-load)
 (add-hook 'dired-load-hook (lambda () (load "dired-x")))
 (add-hook 'python-mode-hook (lambda () (electric-indent-mode nil)))
-(add-hook 'web-mode-hook (lambda ()(setq web-mode-markup-indent-offset 2)))
 
 ;; Workaround for bug of ecb and winner-mode:
 ;; http://stackoverflow.com/questions/9389679/how-to-unload-a-mode-e-g-unload-ecb-to-restore-winner-el-functionality
@@ -493,10 +494,8 @@
 (global-set-key (kbd "C-_") 'undo-tree-undo)
 (global-set-key (kbd "M-_") 'undo-tree-redo)
 (global-set-key (kbd "C-ñ") 'helm-mini)
+(global-set-key (kbd "C-Ñ") 'helm-projectile)
 (global-set-key "\M-o" 'other-window)
-(global-set-key (kbd "<C-M-backspace>") 'dopemacs-backward-kill-line)
-
-(global-set-key " " (quote hippie-expand)) ;; M-TAB
 
 (global-set-key "\C-cg" 'rgrep)
 (global-set-key "\C-ca" 'projectile-ag)
