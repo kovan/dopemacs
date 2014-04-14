@@ -171,9 +171,10 @@
  ;; If there is more than one, they won't work right.
  '(ack-and-a-half-executable "ack-grep")
  '(ack-executable (executable-find "ack-grep"))
+ '(auto-save-default nil)
  '(back-button-mode t)
  '(backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))
- '(c-basic-offset 4)
+ '(c-basic-offset 4 t)
  '(c-default-style (quote ((c-mode . "linux") (c++-mode . "linux") (java-mode . "java") (awk-mode . "awk") (other . "linux"))))
  '(c-max-one-liner-length 100)
  '(c-report-syntactic-errors t)
@@ -190,6 +191,7 @@
  '(confirm-kill-emacs nil)
  '(custom-enabled-themes (quote (zenburn)))
  '(debug-on-error nil)
+ '(delete-by-moving-to-trash t)
  '(delete-old-versions t)
  '(delete-selection-mode t)
  '(develock-auto-enable nil)
@@ -494,7 +496,6 @@
 (global-set-key (kbd "M-_") 'undo-tree-redo)
 (global-set-key (kbd "C-ñ") 'helm-mini)
 (global-set-key "\M-o" 'other-window)
-(global-set-key (kbd "<C-M-backspace>") 'dopemacs-backward-kill-line)
 
 (global-set-key " " (quote hippie-expand)) ;; M-TAB
 
