@@ -174,7 +174,7 @@
  '(auto-save-default nil)
  '(back-button-mode t)
  '(backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))
- '(c-basic-offset 4)
+ '(c-basic-offset 4 t)
  '(c-default-style (quote ((c-mode . "linux") (c++-mode . "linux") (java-mode . "java") (awk-mode . "awk") (other . "linux"))))
  '(c-max-one-liner-length 100)
  '(c-report-syntactic-errors t)
