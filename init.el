@@ -502,6 +502,7 @@
 (global-set-key "\C-cj" 'dired-at-point)
 (global-set-key "\C-cb" 'magit-blame-mode)
 (global-set-key "\C-cm" 'magit-status)
+(global-set-key "\C-co" 'magit-log)
 (global-set-key "\C-cn" 'manage-minor-mode)
 (global-set-key "\C-cc" 'compile)
 (global-set-key "\C-cr" 'revert-buffer)
@@ -512,19 +513,14 @@
 (global-set-key "\C-cf" 'helm-recentf)
 (global-set-key "\C-cl" 'google-lucky-search)
 (global-set-key "\C-ce" 'package-list-packages-no-fetch) ;; e of ELPA
-;; (global-set-key "\C-c\C-n" 'highlight-symbol-next)
-;; (global-set-key "\C-c\C-p" 'highlight-symbol-prev)
+(global-set-key "\C-cw" 'dopemacs-swap-windows)
 (global-set-key "\C-cñ" 'dopemacs-split-window)
 
 
 (global-set-key (kbd "<f6>") 'windresize)
 (global-set-key (kbd "<f7>") 'ecb-minor-mode)
-(global-set-key (kbd "<f8>") 'sunrise)
-
-
-;; (global-set-key (kbd "<f9>") 'gud-cont)
-;; (global-set-key (kbd "<f11>") 'gud-step)
-;; (global-set-key (kbd "<f12>") 'gud-next)
+(global-set-key (kbd "<f10>") 'sunrise)
+(global-set-key (kbd "<f11>") 'dopemacs-toggle-fullscreen)
 
 
 
