@@ -308,6 +308,7 @@
  '(truncate-lines t)
  '(undo-tree-mode-lighter " UT")
  '(uniquify-buffer-name-style (quote forward) nil (uniquify))
+ '(use-dialog-box nil)
  '(visible-bell t)
  '(w3m-cookie-accept-bad-cookies (quote ask))
  '(w3m-default-display-inline-images t)
@@ -323,7 +324,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "DejaVu Sans" :foundry "unknown" :slant normal :weight normal :height 100 :width normal))))
- '(ecb-default-general-face ((t (:height 0.9))))
+ '(ecb-default-general-face ((t (:height 0.9))) t)
  '(highlight-symbol-face ((t (:background "dim gray")))))
 
 
