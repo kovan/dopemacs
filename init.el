@@ -73,7 +73,6 @@
                        helm-git-files
                        helm-git-grep
                        helm-google
-                       helm-google
                        helm-gtags
                        helm-projectile
                        helm-pydoc
@@ -120,9 +119,9 @@
                        slime
                        smart-mode-line
                        smartparens
-                       smex
-                       sr-speedbar
+                       string-inflection
                        stylus-mode
+                       sublimity
                        sunrise-commander
                        syslog-mode
                        textile-mode
@@ -292,6 +291,7 @@
  '(sr-speedbar-right-side nil)
  '(sr-speedbar-skip-other-window-p t)
  '(sr-speedbar-width-x 10)
+ '(sublimity-mode t)
  '(svn-log-edit-show-diff-for-commit t)
  '(svn-status-default-blame-arguments (quote ("-x" "--ignore-eol-style" "-g")))
  '(svn-status-default-log-arguments (quote ("-v -g")))
@@ -362,6 +362,12 @@
 (require 'volatile-highlights)
 (volatile-highlights-mode t)
 (require 'move-text)
+(require 'sublimity)
+(require 'sublimity-scroll)
+;; (require 'sublimity-map)
+(require 'dopemacs-elisp)
+
+
 
 
 (setq-default frame-title-format
@@ -369,9 +375,6 @@
                                                       dired-directory
                                                       (revert-buffer-function " %b"
                                                                               ("%b – Dir:  " default-directory)))))))
-
-
-(require 'dopemacs-elisp)
 
 
 
@@ -418,7 +421,6 @@
 ;; (add-hook 'js2-mode-hook 'ac-js2-mode)
 ;; (add-hook 'js2-mode-hook 'skewer-mode)
 ;; (add-hook 'css-mode-hook 'skewer-css-mode)
-(add-hook 'json-mode 'flymake-json-load)
 (add-hook 'dired-load-hook (lambda () (load "dired-x")))
 (add-hook 'python-mode-hook (lambda () (electric-indent-mode nil)))
 
@@ -456,7 +458,6 @@
 ;; ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-(helm-mode 1)
 (global-set-key "\M-x" 'helm-M-x)
 (global-set-key (kbd "<menu>") 'helm-mini)
 ;; (define-key global-map [remap find-file] 'helm-find-files)
@@ -496,7 +497,8 @@
 (global-set-key (kbd "M-_") 'undo-tree-redo)
 (global-set-key (kbd "C-ñ") 'helm-mini)
 (global-set-key (kbd "C-Ñ") 'helm-projectile)
-(global-set-key "\M-o" 'other-window)
+(global-set-key (kbd "M-o") 'other-window)
+(global-set-key (kbd "M-SPC") 'hippie-expand)
 
 (global-set-key "\C-cg" 'rgrep)
 (global-set-key "\C-ca" 'projectile-ag)
@@ -509,13 +511,14 @@
 (global-set-key "\C-cr" 'revert-buffer)
 (global-set-key "\C-cs" 'multi-term)
 (global-set-key "\C-ct" 'toggle-truncate-lines)
-(global-set-key "\C-cw" 'dopemacs-toggle-window-split)
 (global-set-key "\C-cv" 'eval-buffer)
 (global-set-key "\C-cf" 'helm-recentf)
 (global-set-key "\C-cl" 'google-lucky-search)
 (global-set-key "\C-ce" 'package-list-packages-no-fetch) ;; e of ELPA
-(global-set-key "\C-cw" 'dopemacs-swap-windows)
+(global-set-key "\C-ci" 'string-inflection-cycle)
 (global-set-key "\C-cñ" 'dopemacs-split-window)
+(global-set-key "\C-cu" 'dopemacs-swap-windows)
+(global-set-key "\C-cw" 'dopemacs-toggle-window-split)
 
 
 (global-set-key (kbd "<f6>") 'windresize)
@@ -581,27 +584,20 @@
 ;; (define-key sp-keymap (kbd "H-s j") 'sp-join-sexp)
 ;; (define-key sp-keymap (kbd "H-s s") 'sp-split-sexp)
 
-;;;;;;;;;;;;;;;;;;
-;; pair management
-
 (sp-local-pair 'minibuffer-inactive-mode "'" nil :actions nil)
 
-;;; markdown-mode
 (sp-with-modes '(markdown-mode gfm-mode rst-mode)
   (sp-local-pair "*" "*" :bind "C-*")
   (sp-local-tag "2" "**" "**")
   (sp-local-tag "s" "```scheme" "```")
   (sp-local-tag "<"  "<_>" "</_>" :transform 'sp-match-sgml-tags))
 
-;;; tex-mode latex-mode
 (sp-with-modes '(tex-mode plain-tex-mode latex-mode)
   (sp-local-tag "i" "\"<" "\">"))
 
-;;; html-mode
 (sp-with-modes '(html-mode sgml-mode)
   (sp-local-pair "<" ">"))
 
-;;; lisp modes
 (sp-with-modes sp--lisp-modes
   (sp-local-pair "(" nil :bind "C-("))
 
@@ -617,10 +613,10 @@
        (dopemacs-toggle-fullscreen)))
 
 
+(helm-mode 1)
 (sml/setup)
-
-
 (elpy-enable)
+
 (delq 'flymake-mode elpy-default-minor-modes)
 
 
