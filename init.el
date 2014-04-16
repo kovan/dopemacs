@@ -40,7 +40,7 @@
                        debian-changelog-mode
                        diff-hl
                        dired+
-					   dirtree
+                       dirtree
                        dos
                        ecb
                        editorconfig

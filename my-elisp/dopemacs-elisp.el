@@ -7,6 +7,11 @@
 
 ;;; Code:
 
+(defun dopemacs-bug-report ()
+    "Opens github issues page in a web browser. Please send me any bugs you find, and please inclue your emacs version."
+	  (interactive)
+	    (browse-url "https://github.com/kovan/dopemacs/issues/new"))
+
 (defun dopemacs-swap-windows ()
   "If you have 2 windows, it swaps them."
   (interactive)
