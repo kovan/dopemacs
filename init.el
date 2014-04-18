@@ -464,6 +464,8 @@
 
 (global-set-key "\M-x" 'helm-M-x)
 (global-set-key (kbd "<menu>") 'helm-mini)
+(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+(define-key helm-map (kbd "C-j") 'helm-select-action)
 ;; (define-key global-map [remap find-file] 'helm-find-files)
 (define-key global-map [remap occur] 'helm-occur)
 (define-key global-map [remap list-buffers] 'helm-buffers-list)
