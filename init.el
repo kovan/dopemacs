@@ -21,7 +21,7 @@
                        ;; rainbow-mode
                        ;; smartrep
                        ;; virtualenvwrapper
-					   ace-jump-mode
+                       ace-jump-mode
                        ack-and-a-half
                        ag
                        anzu
@@ -137,6 +137,7 @@
                        whitespace-cleanup-mode
                        windresize
                        yaml-mode
+                       yascroll
                        yasnippet
                        zenburn-theme))
   
@@ -220,6 +221,7 @@
  '(global-hl-line-mode t)
  '(global-rainbow-delimiters-mode t)
  '(global-undo-tree-mode t)
+ '(global-yascroll-bar-mode t)
  '(google-this-mode t)
  '(grep-files-aliases nil)
  '(gud-tooltip-echo-area t)
