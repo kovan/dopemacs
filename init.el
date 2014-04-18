@@ -21,6 +21,7 @@
                        ;; rainbow-mode
                        ;; smartrep
                        ;; virtualenvwrapper
+					   ace-jump-mode
                        ack-and-a-half
                        ag
                        anzu
@@ -410,6 +411,7 @@
 	)
 
 (add-hook 'text-mode-hook 'dopemacs-fixed-width-font-hook)
+(add-hook 'special-mode-hook 'dopemacs-fixed-width-font-hook)
 (add-hook 'dired-mode-hook 'dopemacs-fixed-width-font-hook)
 
 
@@ -454,7 +456,7 @@
 
 
 
-;; KEYBININGS:
+;; KEYBINDINGS:
 ;; ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -490,7 +492,7 @@
 (global-set-key (kbd "C-w") 'dopemacs-xah-cut-line-or-region)
 (global-set-key (kbd "M-k") '(lambda () (interactive) (kill-buffer nil)))
 (global-set-key (kbd "M-K") 'delete-frame)
-
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; This is your old M-x.
 (global-set-key (kbd "C-_") 'undo-tree-undo)
