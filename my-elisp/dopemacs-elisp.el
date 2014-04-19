@@ -211,5 +211,11 @@ Call a second time to restore the original window configuration."
     (switch-to-buffer-other-window nil)))
 
 
+(defun dopemacs-fixed-width-font ()
+	(interactive)
+	(set (make-local-variable 'face-remapping-alist)
+                   '((default :family "DejaVu Sans Mono")))
+	)
+
 (provide 'dopemacs-elisp)
 ;;; dopemacs-elisp.el ends here
