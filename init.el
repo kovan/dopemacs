@@ -82,6 +82,7 @@
                        highlight-symbol
                        howdoi
                        htmlize
+                       httprepl
                        ido-ubiquitous
                        ido-vertical-mode
                        iedit
@@ -105,8 +106,9 @@
                        nyan-mode
                        php-mode
                        pkgbuild-mode
+                       perspective
+                       persp-projectile
                        popwin
-                       powerline
                        projectile
                        rainbow-delimiters
                        rainbow-mode
@@ -172,6 +174,7 @@
  ;; If there is more than one, they won't work right.
  '(ack-and-a-half-executable "ack-grep")
  '(ack-executable (executable-find "ack-grep"))
+ '(auto-hscroll-mode t)
  '(auto-save-default nil)
  '(back-button-mode t)
  '(backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))
@@ -213,11 +216,11 @@
  '(flycheck-check-syntax-automatically (quote (save new-line mode-enabled)))
  '(flycheck-completion-system nil)
  '(flymake-run-in-place nil)
+ '(font-lock-maximum-decoration 5)
  '(global-anzu-mode t)
  '(global-diff-hl-mode t)
  '(global-fixmee-mode t)
  '(global-flycheck-mode t nil (flycheck))
- '(global-font-lock-mode t)
  '(global-hl-line-mode t)
  '(global-rainbow-delimiters-mode t)
  '(global-undo-tree-mode t)
@@ -276,8 +279,6 @@
  '(savehist-additional-variables (quote (kill-ring mark-ring global-mark-ring search-ring regexp-search-ring extended-command-history compile-command)))
  '(savehist-mode t nil (savehist))
  '(scroll-bar-mode nil)
- '(scroll-conservatively 10000)
- '(scroll-step 1)
  '(semantic-idle-scheduler-idle-time 1)
  '(show-smartparens-global-mode t)
  '(show-trailing-whitespace nil)
@@ -293,8 +294,9 @@
  '(speedbar-update-flag nil)
  '(sr-speedbar-right-side nil)
  '(sr-speedbar-skip-other-window-p t)
- '(sr-speedbar-width-x 10)
  '(sublimity-mode t)
+ '(sublimity-scroll-drift-length 1)
+ '(sublimity-scroll-weight 7)
  '(svn-log-edit-show-diff-for-commit t)
  '(svn-status-default-blame-arguments (quote ("-x" "--ignore-eol-style" "-g")))
  '(svn-status-default-log-arguments (quote ("-v -g")))
@@ -335,11 +337,20 @@
 ;; GENERAL:
 ;; ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-(require 'cl)
 (add-to-list 'load-path "~/.emacs.d/my-elisp/")
+(require 'cl)
+(require 'guide-key-tip)
+(require 'smartparens-config)
+(require 'smartparens-html)
+(require 'volatile-highlights)
+(require 'move-text)
+(require 'persp-projectile)
+(require 'sublimity)
+(require 'sublimity-scroll)
+;; (require 'sublimity-map)
+
 (defalias 'yes-or-no-p 'y-or-n-p)
 (load-library "iso-transl")
-
 (toggle-diredp-find-file-reuse-dir 1)
 (setq yas-verbosity 1)
 (setq desktop-dirname "~/.emacs.d")
@@ -357,17 +368,9 @@
 (setq helm-gtags-mode 1)
 (setq sml/vc-mode-show-backend t)
 
-(require 'guide-key-tip)
-(setq guide-key/guide-key-sequence '("C-x r" "C-x v" "C-x 4" "C-x 5" "C-c" "C-c p" "C-c /" "C-c ." "C-c . l" "C-c . g" "C-c . m" "C-c &" "C-x c" "C-c !"))
-
-(require 'smartparens-config)
-(require 'smartparens-html)
-(require 'volatile-highlights)
+(setq guide-key/guide-key-sequence '("C-x r" "C-x v" "C-x 4" "C-x 5" "C-c" "C-c p" "C-c /" "C-c ." "C-c . l" "C-c . g" "C-c . m" "C-c &" "C-x c" "C-c !" "C-c C-t" "C-c C-e" "C-c C-d" "C-c C-b" "C-x x"))
 (volatile-highlights-mode t)
-(require 'move-text)
-(require 'sublimity)
-(require 'sublimity-scroll)
-;; (require 'sublimity-map)
+
 (require 'dopemacs-elisp)
 
 
@@ -402,31 +405,17 @@
 	(local-set-key (kbd "RET")  'newline-and-indent)
 	(whitespace-mode)
 	(volatile-highlights-mode)
+	(font-lock-mode)
 	)
 
 (add-hook 'prog-mode-hook 'dopemacs-prog-mode-hook)
 
 
-(defun dopemacs-fixed-width-font-hook ()
-	(set (make-local-variable 'face-remapping-alist)
-                   '((default :family "DejaVu Sans Mono")))
-	)
+(add-hook 'text-mode-hook 'dopemacs-fixed-width-font)
+;; (add-hook 'special-mode-hook 'dopemacs-fixed-width-font)
+(add-hook 'dired-mode-hook 'dopemacs-fixed-width-font)
 
-(add-hook 'text-mode-hook 'dopemacs-fixed-width-font-hook)
-(add-hook 'special-mode-hook 'dopemacs-fixed-width-font-hook)
-(add-hook 'dired-mode-hook 'dopemacs-fixed-width-font-hook)
-
-
-(require 'jquery-doc)
-;; (add-hook 'python-mode-hook 'jedi:setup)
-(add-hook 'web-mode-hook 'jquery-doc-setup)
-;; (add-hook 'web-mode-hook 'skewer-html-mode)
-;; (add-hook 'js2-mode-hook 'jquery-doc-setup)
-;; (add-hook 'js2-mode-hook 'ac-js2-mode)
-;; (add-hook 'js2-mode-hook 'skewer-mode)
-;; (add-hook 'css-mode-hook 'skewer-css-mode)
 (add-hook 'dired-load-hook (lambda () (load "dired-x")))
-(add-hook 'python-mode-hook (lambda () (electric-indent-mode nil)))
 
 ;; Workaround for bug of ecb and winner-mode:
 ;; http://stackoverflow.com/questions/9389679/how-to-unload-a-mode-e-g-unload-ecb-to-restore-winner-el-functionality
@@ -527,8 +516,9 @@
 (global-set-key "\C-cw" 'dopemacs-toggle-window-split)
 
 
-(global-set-key (kbd "<f6>") 'windresize)
-(global-set-key (kbd "<f7>") 'ecb-minor-mode)
+(global-set-key (kbd "<f7>") 'windresize)
+(global-set-key (kbd "<f8>") 'ecb-minor-mode)
+(global-set-key (kbd "<f9>") 'sr-speedbar-toggle)
 (global-set-key (kbd "<f10>") 'sunrise)
 (global-set-key (kbd "<f11>") 'dopemacs-toggle-fullscreen)
 
