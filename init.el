@@ -344,7 +344,7 @@
 (require 'smartparens-html)
 (require 'volatile-highlights)
 (require 'move-text)
-(require 'persp-projectile)
+;; (require 'persp-projectile)
 (require 'sublimity)
 (require 'sublimity-scroll)
 ;; (require 'sublimity-map)
