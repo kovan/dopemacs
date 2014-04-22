@@ -218,11 +218,11 @@
  '(flymake-run-in-place nil)
  '(font-lock-maximum-decoration 5)
  '(global-anzu-mode t)
+ '(global-auto-complete-mode t)
  '(global-diff-hl-mode t)
  '(global-fixmee-mode t)
  '(global-flycheck-mode t nil (flycheck))
  '(global-hl-line-mode t)
- '(global-rainbow-delimiters-mode t)
  '(global-undo-tree-mode t)
  '(global-yascroll-bar-mode t)
  '(google-this-mode t)
@@ -253,6 +253,7 @@
  '(make-backup-files t)
  '(mk-proj-use-ido-selection t)
  '(mouse-avoidance-mode (quote banish) nil (avoid))
+ '(mouse-wheel-scroll-amount (quote (3 ((shift) . 1) ((control)))))
  '(mouse-yank-at-point t)
  '(next-error-recenter (quote (4)))
  '(ns-command-modifier (quote meta))
@@ -329,8 +330,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "DejaVu Sans" :foundry "unknown" :slant normal :weight normal :height 100 :width normal))))
- '(ecb-default-general-face ((t (:height 0.9))) t)
- '(highlight-symbol-face ((t (:background "dim gray")))))
+ '(ecb-default-general-face ((t (:height 0.9))))
+ '(highlight-symbol-face ((t (:background "dim gray"))))
+ '(rainbow-delimiters-depth-1-face ((t (:foreground "medium spring green"))))
+ '(rainbow-delimiters-unmatched-face ((t (:foreground "light coral" :weight bold)))))
 
 
 
@@ -338,7 +341,7 @@
 ;; ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 (add-to-list 'load-path "~/.emacs.d/my-elisp/")
-(require 'cl)
+(require 'cl-lib)
 (require 'guide-key-tip)
 (require 'smartparens-config)
 (require 'smartparens-html)
@@ -371,17 +374,12 @@
 (setq guide-key/guide-key-sequence '("C-x r" "C-x v" "C-x 4" "C-x 5" "C-c" "C-c p" "C-c /" "C-c ." "C-c . l" "C-c . g" "C-c . m" "C-c &" "C-x c" "C-c !" "C-c C-t" "C-c C-e" "C-c C-d" "C-c C-b" "C-x x"))
 (volatile-highlights-mode t)
 
-(require 'dopemacs-elisp)
-
-
-
 
 (setq-default frame-title-format
               (list '((buffer-file-name "emacs %f" (dired-directory
                                                       dired-directory
                                                       (revert-buffer-function " %b"
                                                                               ("%b – Dir:  " default-directory)))))))
-
 
 
 (defadvice yank (before slick-copy activate)
@@ -393,19 +391,21 @@
 
 
 
+(require 'dopemacs-elisp)
+
+
 ;; HOOKS :
 ;; ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 (defun dopemacs-prog-mode-hook ()
 	(yas-minor-mode)
+	(rainbow-delimiters-mode)
 	(modify-syntax-entry ?_ "w")
 	(modify-syntax-entry ?- "w")
-	(nlinum-mode)
 	(highlight-symbol-mode)
 	(local-set-key "\C-j"  'join-line)
 	(local-set-key (kbd "RET")  'newline-and-indent)
 	(whitespace-mode)
 	(volatile-highlights-mode)
-	(font-lock-mode)
 	)
 
 (add-hook 'prog-mode-hook 'dopemacs-prog-mode-hook)
@@ -430,8 +430,6 @@
 ;; ASSOCIATIONS :
 ;; ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-(add-to-list 'auto-mode-alist '("\\.jsx\\'" . jsx-mode))
-(autoload 'jsx-mode "jsx-mode" "JSX mode" t)
 (add-to-list 'auto-mode-alist '("\\.ui$" . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.xslt\\'" . nxml-mode))
@@ -440,6 +438,7 @@
 (add-to-list 'auto-mode-alist '("configure\\(\\.in\\)?\\'" . autoconf-mode))
 (add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
 (add-to-list 'auto-mode-alist '("\\.zsh$" . sh-mode))
+;; (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
 
 
@@ -463,9 +462,8 @@
   (define-key lisp-interaction-mode-map [remap completion-at-point] 'helm-lisp-completion-at-point)
   (define-key emacs-lisp-mode-map       [remap completion-at-point] 'helm-lisp-completion-at-point))
 
+
 (windmove-default-keybindings 'meta)
-
-
 
 (global-set-key (kbd "<C-S-up>")     'buf-move-up)
 (global-set-key (kbd "<C-S-down>")   'buf-move-down)
@@ -481,39 +479,40 @@
 (global-set-key (kbd "<C-tab>") 'iflipb-next-buffer)
 (global-set-key (kbd "<C-S-iso-lefttab>") 'iflipb-previous-buffer)
 
+(define-key isearch-mode-map (kbd "M-i") 'helm-swoop-from-isearch)
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+
 (global-set-key (kbd "M-w") 'dopemacs-xah-copy-line-or-region)
 (global-set-key (kbd "C-w") 'dopemacs-xah-cut-line-or-region)
 (global-set-key (kbd "M-k") '(lambda () (interactive) (kill-buffer nil)))
 (global-set-key (kbd "M-K") 'delete-frame)
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; This is your old M-x.
 (global-set-key (kbd "C-_") 'undo-tree-undo)
 (global-set-key (kbd "M-_") 'undo-tree-redo)
-(global-set-key (kbd "C-ñ") 'helm-mini)
-(global-set-key (kbd "C-Ñ") 'helm-projectile)
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "M-SPC") 'hippie-expand)
+(global-set-key (kbd "C-ñ") 'helm-mini)
+(global-set-key (kbd "<C-dead-acute>") 'helm-projectile)
 
-(global-set-key "\C-cg" 'rgrep)
 (global-set-key "\C-ca" 'projectile-ag)
-(global-set-key "\C-cj" 'dired-at-point)
 (global-set-key "\C-cb" 'magit-blame-mode)
-(global-set-key "\C-cm" 'magit-status)
-(global-set-key "\C-co" 'magit-log)
-(global-set-key "\C-cn" 'manage-minor-mode)
 (global-set-key "\C-cc" 'compile)
+(global-set-key "\C-ce" 'package-list-packages-no-fetch) ;; e of ELPA
+(global-set-key "\C-cf" 'helm-recentf)
+(global-set-key "\C-cg" 'rgrep)
+(global-set-key "\C-ci" 'string-inflection-cycle)
+(global-set-key "\C-cj" 'dired-at-point)
+(global-set-key "\C-cl" 'google-lucky-search)
+(global-set-key "\C-cm" 'magit-status)
+(global-set-key "\C-cn" 'manage-minor-mode)
+(global-set-key "\C-co" 'magit-log)
 (global-set-key "\C-cr" 'revert-buffer)
 (global-set-key "\C-cs" 'multi-term)
 (global-set-key "\C-ct" 'toggle-truncate-lines)
-(global-set-key "\C-cv" 'eval-buffer)
-(global-set-key "\C-cf" 'helm-recentf)
-(global-set-key "\C-cl" 'google-lucky-search)
-(global-set-key "\C-ce" 'package-list-packages-no-fetch) ;; e of ELPA
-(global-set-key "\C-ci" 'string-inflection-cycle)
-(global-set-key "\C-cñ" 'dopemacs-split-window)
 (global-set-key "\C-cu" 'dopemacs-swap-windows)
+(global-set-key "\C-cv" 'eval-buffer)
 (global-set-key "\C-cw" 'dopemacs-toggle-window-split)
+(global-set-key "\C-cñ" 'dopemacs-split-window)
 
 
 (global-set-key (kbd "<f7>") 'windresize)
