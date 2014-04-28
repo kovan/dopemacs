@@ -15,12 +15,12 @@
 
 (when (>= emacs-major-version 24)
   (setq package-list '(
-                       ;; ac-js2
                        ;; auto-complete
                        ;; fixmee
                        ;; rainbow-mode
                        ;; smartrep
                        ;; virtualenvwrapper
+                       ac-js2
                        ace-jump-mode
                        ack-and-a-half
                        ag
@@ -83,7 +83,6 @@
                        howdoi
                        htmlize
                        httprepl
-                       ido-ubiquitous
                        ido-vertical-mode
                        iedit
                        iflipb
@@ -136,6 +135,7 @@
                        w3m
                        web-mode
                        wgrep
+                       wgrep-helm
                        whitespace-cleanup-mode
                        windresize
                        yaml-mode
@@ -209,7 +209,7 @@
  '(ecb-windows-width 0.25)
  '(ediff-split-window-function (quote split-window-horizontally))
  '(electric-indent-mode nil)
- '(elpy-rpc-backend "rope")
+ '(elpy-rpc-backend "jedi")
  '(enable-remote-dir-locals t)
  '(eval-expression-debug-on-error nil)
  '(flx-ido-mode t)
@@ -249,6 +249,7 @@
  '(initial-scratch-message nil)
  '(isearch-allow-scroll t)
  '(ispell-dictionary "english")
+ '(js2-mode-show-parse-errors nil)
  '(magit-use-overlays nil)
  '(make-backup-files t)
  '(mk-proj-use-ido-selection t)
@@ -286,7 +287,7 @@
  '(smart-tab-using-hippie-expand t)
  '(smartparens-global-mode t)
  '(smex-history-length 30)
- '(sml/hidden-modes (quote (" hl-p" " FIC" " yas" " VHl" " Helm" " AC" " SP" " hl-s" " ||" " Google" " WSC" " ws" " UT" " company" " back" " Anzu" " Guide")))
+ '(sml/hidden-modes (quote (" hl-p" " FIC" " yas" " VHl" " Helm" " AC" " SP" " hl-s" " ||" " Google" " WSC" " ws" " UT" " company" " back" " Anzu" " Guide" " hs")))
  '(sml/use-projectile-p nil)
  '(sml/vc-mode-show-backend t)
  '(sp-autoescape-string-quote nil)
@@ -347,11 +348,10 @@
 (require 'smartparens-html)
 (require 'volatile-highlights)
 (require 'move-text)
-;; (require 'persp-projectile)
+(require 'diminish)
 (require 'sublimity)
 (require 'sublimity-scroll)
 ;; (require 'sublimity-map)
-
 (defalias 'yes-or-no-p 'y-or-n-p)
 (load-library "iso-transl")
 (toggle-diredp-find-file-reuse-dir 1)
@@ -367,11 +367,11 @@
       kept-old-versions 2
       version-control t)       ; use versioned backups
 (setq web-mode-engines-alist '(( "django" . "\\.html$")))
-(setq jedi:complete-on-dot t)                 ; optional
+;; (setq jedi:complete-on-dot t)                 ; optional
 (setq helm-gtags-mode 1)
 (setq sml/vc-mode-show-backend t)
 
-(setq guide-key/guide-key-sequence '("C-x r" "C-x v" "C-x 4" "C-x 5" "C-c" "C-c p" "C-c /" "C-c ." "C-c . l" "C-c . g" "C-c . m" "C-c &" "C-x c" "C-c !" "C-c C-t" "C-c C-e" "C-c C-d" "C-c C-b" "C-x x"))
+(setq guide-key/guide-key-sequence '("C-x r" "C-x v" "C-x 4" "C-x 5" "C-c" "C-c p" "C-c /" "C-c ." "C-c . l" "C-c . g" "C-c . m" "C-c &" "C-x c" "C-c !" "C-c C-t" "C-c C-e" "C-c C-d" "C-c C-b" "C-x x" "C-c @"))
 (volatile-highlights-mode t)
 
 
@@ -406,6 +406,7 @@
 	(local-set-key (kbd "RET")  'newline-and-indent)
 	(whitespace-mode)
 	(volatile-highlights-mode)
+	(hs-minor-mode)
 	)
 
 (add-hook 'prog-mode-hook 'dopemacs-prog-mode-hook)
@@ -438,7 +439,7 @@
 (add-to-list 'auto-mode-alist '("configure\\(\\.in\\)?\\'" . autoconf-mode))
 (add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
 (add-to-list 'auto-mode-alist '("\\.zsh$" . sh-mode))
-;; (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
 
 
@@ -489,30 +490,35 @@
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command) ;; This is your old M-x.
 (global-set-key (kbd "C-_") 'undo-tree-undo)
 (global-set-key (kbd "M-_") 'undo-tree-redo)
+(global-set-key (kbd "C-;") 'iedit-mode)
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "M-SPC") 'hippie-expand)
 (global-set-key (kbd "C-ñ") 'helm-mini)
+(global-set-key (kbd "C-Ñ") 'helm-projectile)
 (global-set-key (kbd "<C-dead-acute>") 'helm-projectile)
+(global-set-key (kbd "<C-dead-grave>") 'hs-toggle-hiding)
 
 (global-set-key "\C-ca" 'projectile-ag)
 (global-set-key "\C-cb" 'magit-blame-mode)
 (global-set-key "\C-cc" 'compile)
-(global-set-key "\C-ce" 'package-list-packages-no-fetch) ;; e of ELPA
+(global-set-key "\C-ce" 'package-list-packages-no-fetch)
 (global-set-key "\C-cf" 'helm-recentf)
 (global-set-key "\C-cg" 'rgrep)
+(global-set-key "\C-ch" 'hs-toggle-hiding)
 (global-set-key "\C-ci" 'string-inflection-cycle)
 (global-set-key "\C-cj" 'dired-at-point)
 (global-set-key "\C-cl" 'google-lucky-search)
 (global-set-key "\C-cm" 'magit-status)
 (global-set-key "\C-cn" 'manage-minor-mode)
 (global-set-key "\C-co" 'magit-log)
+;; (global-set-key "\C-cp") ;; reserved for Projectile
 (global-set-key "\C-cr" 'revert-buffer)
 (global-set-key "\C-cs" 'multi-term)
 (global-set-key "\C-ct" 'toggle-truncate-lines)
 (global-set-key "\C-cu" 'dopemacs-swap-windows)
 (global-set-key "\C-cv" 'eval-buffer)
 (global-set-key "\C-cw" 'dopemacs-toggle-window-split)
-(global-set-key "\C-cñ" 'dopemacs-split-window)
+(global-set-key "\C-cx" 'dopemacs-split-window)
 
 
 (global-set-key (kbd "<f7>") 'windresize)

@@ -217,5 +217,12 @@ Call a second time to restore the original window configuration."
                    '((default :family "DejaVu Sans Mono")))
 	)
 
+(defun dopemacs-variable-width-font ()
+	(interactive)
+	(set (make-local-variable 'face-remapping-alist)
+                   '((default :family "DejaVu Sans")))
+	)
+
+
 (provide 'dopemacs-elisp)
 ;;; dopemacs-elisp.el ends here
