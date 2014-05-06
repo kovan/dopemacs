@@ -223,6 +223,21 @@ Call a second time to restore the original window configuration."
                    '((default :family "DejaVu Sans")))
 	)
 
+(defun dopemacs-font-lock-operators()   (interactive)
+	(font-lock-add-keywords nil
+		'(("\\." . font-lock-warning-face)
+			 ("\\+" . font-lock-warning-face)
+			 ("\\-" . font-lock-warning-face)
+			 ("\=" . font-lock-warning-face)
+			 (":" . font-lock-warning-face)
+			 ("\\[" . font-lock-warning-face)
+			 ("\\]" . font-lock-warning-face)
+			 ("," . font-lock-warning-face)
+			 ("!" . font-lock-warning-face)
+			 ("(" . font-lock-warning-face)
+			 (")" . font-lock-warning-face)
+			 ("\<" . font-lock-warning-face)
+			 ("\>" . font-lock-warning-face))))
 
 (provide 'dopemacs-elisp)
 ;;; dopemacs-elisp.el ends here

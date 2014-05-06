@@ -20,6 +20,8 @@
                        ;; rainbow-mode
                        ;; smartrep
                        ;; virtualenvwrapper
+						  ;; anaconda-mode
+						  ;; pymacs
                        ac-js2
                        ace-jump-mode
                        ack-and-a-half
@@ -51,7 +53,6 @@
                        expand-region
                        feature-mode
                        fic-ext-mode
-                       find-file-in-project
                        flx-ido
                        flycheck
                        free-keys
@@ -69,6 +70,7 @@
                        helm-ack
                        helm-ag
                        helm-chrome
+                       helm-company
                        helm-descbinds
                        helm-flycheck
                        helm-git-files
@@ -124,6 +126,7 @@
                        string-inflection
                        stylus-mode
                        sublimity
+                       sublime-themes
                        sunrise-commander
                        syslog-mode
                        textile-mode
@@ -140,8 +143,7 @@
                        windresize
                        yaml-mode
                        yascroll
-                       yasnippet
-                       zenburn-theme))
+                       yasnippet))
   
   (require 'package)
 
@@ -187,6 +189,8 @@
  '(company-idle-delay 0.3)
  '(company-minimum-prefix-length 2)
  '(company-tooltip-limit 30)
+ '(company-tooltip-minimum-width 1000)
+ '(company-tooltip-offset-display (quote lines))
  '(compilation-ask-about-save nil)
  '(compilation-mode-hook nil)
  '(compilation-scroll-output t)
@@ -209,7 +213,9 @@
  '(ecb-windows-width 0.25)
  '(ediff-split-window-function (quote split-window-horizontally))
  '(electric-indent-mode nil)
+ '(elpy-default-minor-modes (quote (eldoc-mode)))
  '(elpy-rpc-backend "jedi")
+ '(elpy-rpc-project-specific t)
  '(enable-remote-dir-locals t)
  '(eval-expression-debug-on-error nil)
  '(flx-ido-mode t)
@@ -217,8 +223,10 @@
  '(flycheck-completion-system nil)
  '(flymake-run-in-place nil)
  '(font-lock-maximum-decoration 5)
+ '(git-commit-fill-column 9999)
+ '(git-commit-mode-hook (quote (flyspell-mode)))
+ '(git-commit-summary-max-length 9999)
  '(global-anzu-mode t)
- '(global-auto-complete-mode t)
  '(global-diff-hl-mode t)
  '(global-fixmee-mode t)
  '(global-flycheck-mode t nil (flycheck))
@@ -254,7 +262,8 @@
  '(make-backup-files t)
  '(mk-proj-use-ido-selection t)
  '(mouse-avoidance-mode (quote banish) nil (avoid))
- '(mouse-wheel-scroll-amount (quote (3 ((shift) . 1) ((control)))))
+ '(mouse-wheel-progressive-speed nil)
+ '(mouse-wheel-scroll-amount (quote (8 ((shift) . 1) ((control)))))
  '(mouse-yank-at-point t)
  '(next-error-recenter (quote (4)))
  '(ns-command-modifier (quote meta))
@@ -287,8 +296,7 @@
  '(smart-tab-using-hippie-expand t)
  '(smartparens-global-mode t)
  '(smex-history-length 30)
- '(sml/hidden-modes (quote (" hl-p" " FIC" " yas" " VHl" " Helm" " AC" " SP" " hl-s" " ||" " Google" " WSC" " ws" " UT" " company" " back" " Anzu" " Guide" " hs")))
- '(sml/use-projectile-p nil)
+ '(sml/hidden-modes " hl-p\\| FIC\\| yas\\| VHl\\| Helm\\| AC\\| SP\\| hl-s\\| ||\\| Google\\| WSC\\| ws\\| UT\\| company\\| back\\| Anzu\\| Guide\\| hs\\| Projectile\\[.*\\]")
  '(sml/vc-mode-show-backend t)
  '(sp-autoescape-string-quote nil)
  '(speedbar-show-unknown-files t)
@@ -331,10 +339,9 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "DejaVu Sans" :foundry "unknown" :slant normal :weight normal :height 100 :width normal))))
- '(ecb-default-general-face ((t (:height 0.9))))
- '(highlight-symbol-face ((t (:background "dim gray"))))
- '(rainbow-delimiters-depth-1-face ((t (:foreground "medium spring green"))))
- '(rainbow-delimiters-unmatched-face ((t (:foreground "light coral" :weight bold)))))
+ '(company-tooltip ((t (:background "#4F4F4F" :foreground "#F0DFAF" :family "DejaVu Sans Mono"))))
+ '(ecb-default-general-face ((t (:height 0.9))) t)
+ '(highlight-symbol-face ((t (:background "dim gray")))))
 
 
 
@@ -351,6 +358,7 @@
 (require 'diminish)
 (require 'sublimity)
 (require 'sublimity-scroll)
+(require 'company)
 ;; (require 'sublimity-map)
 (defalias 'yes-or-no-p 'y-or-n-p)
 (load-library "iso-transl")
@@ -370,8 +378,9 @@
 ;; (setq jedi:complete-on-dot t)                 ; optional
 (setq helm-gtags-mode 1)
 (setq sml/vc-mode-show-backend t)
+(add-to-list 'company-backends 'company-anaconda)
 
-(setq guide-key/guide-key-sequence '("C-x r" "C-x v" "C-x 4" "C-x 5" "C-c" "C-c p" "C-c /" "C-c ." "C-c . l" "C-c . g" "C-c . m" "C-c &" "C-x c" "C-c !" "C-c C-t" "C-c C-e" "C-c C-d" "C-c C-b" "C-x x" "C-c @"))
+(setq guide-key/guide-key-sequence '("C-x r" "C-x v" "C-x 4" "C-x 5" "C-c" "C-c p" "C-c p 4""C-c /" "C-c ." "C-c . l" "C-c . g" "C-c . m" "C-c &" "C-x c" "C-c !" "C-c C-t" "C-c C-e" "C-c C-d" "C-c C-b" "C-x x" "C-c @" "C-c C-t" "C-x p" "C-x p n" "C-x p 4"))
 (volatile-highlights-mode t)
 
 
@@ -380,6 +389,16 @@
                                                       dired-directory
                                                       (revert-buffer-function " %b"
                                                                               ("%b – Dir:  " default-directory)))))))
+
+
+(require 'flycheck)
+(flycheck-define-checker jsxhint-checker
+  "A JSX syntax and style checker based on JSXHint."
+
+  :command ("jsxhint" source)
+  :error-patterns
+  ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
+  :modes (jsx-mode js-mode js2-mode web-mode))
 
 
 (defadvice yank (before slick-copy activate)
@@ -397,31 +416,34 @@
 ;; HOOKS :
 ;; ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 (defun dopemacs-prog-mode-hook ()
+    (company-mode)
 	(yas-minor-mode)
-	(rainbow-delimiters-mode)
+	(nlinum-mode)
+	(which-func-mode)
+	;; (dopemacs-font-lock-operators)
+	;; (rainbow-delimiters-mode)
 	(modify-syntax-entry ?_ "w")
 	(modify-syntax-entry ?- "w")
 	(highlight-symbol-mode)
 	(local-set-key "\C-j"  'join-line)
 	(local-set-key (kbd "RET")  'newline-and-indent)
-	(whitespace-mode)
+	;; (whitespace-mode)
 	(volatile-highlights-mode)
 	(hs-minor-mode)
 	)
 
 (add-hook 'prog-mode-hook 'dopemacs-prog-mode-hook)
-
-
 (add-hook 'text-mode-hook 'dopemacs-fixed-width-font)
 ;; (add-hook 'special-mode-hook 'dopemacs-fixed-width-font)
 (add-hook 'dired-mode-hook 'dopemacs-fixed-width-font)
-
 (add-hook 'dired-load-hook (lambda () (load "dired-x")))
+(add-hook 'python-mode-hook 'anaconda-mode)
+(add-hook 'python-mode-hook 'anaconda-eldoc)
+(add-hook 'jsx-mode-hook (lambda () (flycheck-select-checker 'jsxhint-checker) (flycheck-mode)))
 
 ;; Workaround for bug of ecb and winner-mode:
 ;; http://stackoverflow.com/questions/9389679/how-to-unload-a-mode-e-g-unload-ecb-to-restore-winner-el-functionality
 (add-hook 'ecb-deactivate-hook '(lambda () (ecb-disable-advices 'ecb-winman-not-supported-function-advices t)))
-
 
 
 
@@ -492,11 +514,12 @@
 (global-set-key (kbd "M-_") 'undo-tree-redo)
 (global-set-key (kbd "C-;") 'iedit-mode)
 (global-set-key (kbd "M-o") 'other-window)
-(global-set-key (kbd "M-SPC") 'hippie-expand)
+(global-set-key (kbd "C-º") 'hippie-expand)
+(global-set-key (kbd "M-SPC") 'company-complete)
 (global-set-key (kbd "C-ñ") 'helm-mini)
-(global-set-key (kbd "C-Ñ") 'helm-projectile)
-(global-set-key (kbd "<C-dead-acute>") 'helm-projectile)
-(global-set-key (kbd "<C-dead-grave>") 'hs-toggle-hiding)
+(global-set-key (kbd "C-Ñ") 'hs-toggle-hiding)
+(global-set-key (kbd "<C-dead-acute>") 'hs-toggle-hiding)
+(global-set-key (kbd "<C-dead-grave>") 'helm-projectile)
 
 (global-set-key "\C-ca" 'projectile-ag)
 (global-set-key "\C-cb" 'magit-blame-mode)
@@ -521,6 +544,7 @@
 (global-set-key "\C-cx" 'dopemacs-split-window)
 
 
+(global-set-key (kbd "<f6>") 'magit-status)
 (global-set-key (kbd "<f7>") 'windresize)
 (global-set-key (kbd "<f8>") 'ecb-minor-mode)
 (global-set-key (kbd "<f9>") 'sr-speedbar-toggle)
@@ -613,12 +637,13 @@
 (cond ((eq window-system 'x)
        (dopemacs-toggle-fullscreen)))
 
-
 (helm-mode 1)
+;; (load-theme 'jujube)
+(load-theme 'my-zenburn)
 (sml/setup)
-(elpy-enable)
+;; (elpy-enable)
+;; (delq 'flymake-mode elpy-default-minor-modes)
 
-(delq 'flymake-mode elpy-default-minor-modes)
 
 
 
