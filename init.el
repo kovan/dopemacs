@@ -355,7 +355,6 @@
 (require 'smartparens-html)
 (require 'volatile-highlights)
 (require 'move-text)
-(require 'diminish)
 (require 'sublimity)
 (require 'sublimity-scroll)
 (require 'company)
