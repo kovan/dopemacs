@@ -180,7 +180,7 @@
  '(auto-save-default nil)
  '(back-button-mode t)
  '(backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))
- '(c-basic-offset 4 t)
+ '(c-basic-offset 4)
  '(c-default-style (quote ((c-mode . "linux") (c++-mode . "linux") (java-mode . "java") (awk-mode . "awk") (other . "linux"))))
  '(c-max-one-liner-length 100)
  '(c-report-syntactic-errors t)
@@ -197,7 +197,7 @@
  '(compilation-search-path (quote ("")))
  '(compilation-window-height 30)
  '(confirm-kill-emacs nil)
- '(custom-enabled-themes (quote (zenburn)))
+ '(custom-safe-themes (quote ("52849d123c41baae998e6ede45b8af06fae6fc6a2171c7dd80876862a87b936f" "ce8cf19bea146e116719eb681601a95c37887509a5d2f9d192a733e9779ebf16" "be82bcaee6fe58904eafcee9da696715d4c1acbc2a8146b976443a67895d423f" "85d8ec17aa31efc9515b82e2135b83d6d96237492e8d6368e70e289629268972" "c2fd7de1f36cb91839a4cedd3aa9f35d9ddc007fc09dc18940b0f9f72cda08d6" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "579e9950513524d8739e08eae289419cfcb64ed9b7cc910dd2e66151c77975c4" "cd70962b469931807533f5ab78293e901253f5eeb133a46c2965359f23bfb2ea" "f0ea6118d1414b24c2e4babdc8e252707727e7b4ff2e791129f240a2b3093e32" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
  '(debug-on-error nil)
  '(delete-by-moving-to-trash t)
  '(delete-old-versions t)
@@ -209,6 +209,8 @@
  '(ecb-layout-window-sizes (quote (("left13" (ecb-directories-buffer-name 0.12213740458015267 . 0.9833333333333333)))))
  '(ecb-options-version "2.40")
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
+ '(ecb-source-file-regexps (quote ((".*" ("\\(^\\(\\.\\|#\\)\\|\\(~$\\|\\.\\(elc\\|obj\\|o\\|class\\|lib\\|dll\\|a\\|so\\|cache\\|pyc\\)$\\)\\)") ("^\\.\\(emacs\\|gnus\\)$")))))
+ '(ecb-source-path (quote (("/" "/") ("/home/k/proyectos" "proyectos") (#("/home/k/sandbox" 0 15 (help-echo "Mouse-2 toggles maximizing, mouse-3 displays a popup-menu")) "sandbox"))))
  '(ecb-tip-of-the-day nil)
  '(ecb-windows-width 0.25)
  '(ediff-split-window-function (quote split-window-horizontally))
@@ -262,8 +264,12 @@
  '(make-backup-files t)
  '(mk-proj-use-ido-selection t)
  '(mouse-avoidance-mode (quote banish) nil (avoid))
+<<<<<<< HEAD
+ '(mouse-wheel-scroll-amount (quote (3 ((shift) . 1) ((control)))))
+=======
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount (quote (8 ((shift) . 1) ((control)))))
+>>>>>>> a32b46759b527a50150e6fb3546c619c95e094dd
  '(mouse-yank-at-point t)
  '(next-error-recenter (quote (4)))
  '(ns-command-modifier (quote meta))
@@ -285,6 +291,10 @@
  '(recentf-max-saved-items 1000)
  '(recentf-mode t)
  '(remember-data-file "~/.agenda.org")
+ '(ropemacs-completing-read-function (quote completing-read))
+ '(ropemacs-enable-shortcuts nil)
+ '(ropemacs-local-prefix nil)
+ '(safe-local-variable-values (quote ((web-mode-markup-indent-offset . 2) (ack-and-a-half-arguments "--ignore-dir=static/vendor --ignore-dir=static/bower_components --ignore-dir=log"))))
  '(save-interprogram-paste-before-kill nil)
  '(save-place t nil (saveplace))
  '(savehist-additional-variables (quote (kill-ring mark-ring global-mark-ring search-ring regexp-search-ring extended-command-history compile-command)))
@@ -296,7 +306,12 @@
  '(smart-tab-using-hippie-expand t)
  '(smartparens-global-mode t)
  '(smex-history-length 30)
+<<<<<<< HEAD
+ '(sml/hidden-modes (quote (" hl-p" " FIC" " yas" " VHl" " Helm" " AC" " SP" " hl-s" " ||" " Google" " WSC" " ws" " UT" " company" " back" " Anzu" " Guide" " hs")))
+ '(sml/use-projectile-p nil)
+=======
  '(sml/hidden-modes " hl-p\\| FIC\\| yas\\| VHl\\| Helm\\| AC\\| SP\\| hl-s\\| ||\\| Google\\| WSC\\| ws\\| UT\\| company\\| back\\| Anzu\\| Guide\\| hs\\| Projectile\\[.*\\]")
+>>>>>>> a32b46759b527a50150e6fb3546c619c95e094dd
  '(sml/vc-mode-show-backend t)
  '(sp-autoescape-string-quote nil)
  '(speedbar-show-unknown-files t)
@@ -355,6 +370,10 @@
 (require 'smartparens-html)
 (require 'volatile-highlights)
 (require 'move-text)
+<<<<<<< HEAD
+(require 'diminish)
+=======
+>>>>>>> a32b46759b527a50150e6fb3546c619c95e094dd
 (require 'sublimity)
 (require 'sublimity-scroll)
 (require 'company)
@@ -418,7 +437,10 @@
     (company-mode)
 	(yas-minor-mode)
 	(nlinum-mode)
+<<<<<<< HEAD
+=======
 	(which-func-mode)
+>>>>>>> a32b46759b527a50150e6fb3546c619c95e094dd
 	;; (dopemacs-font-lock-operators)
 	;; (rainbow-delimiters-mode)
 	(modify-syntax-entry ?_ "w")
@@ -650,5 +672,6 @@
 
 (provide 'init)
 ;;; init.el ends here
+
 
 

@@ -14,3 +14,4 @@ tmp
 bookmarks.emacs
 url/
 session.*
+/el-get/
