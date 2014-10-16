@@ -180,6 +180,8 @@
  '(auto-save-default nil)
  '(back-button-mode t)
  '(backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))
+ '(blink-cursor-interval 0.1)
+ '(blink-cursor-mode nil)
  '(c-basic-offset 4)
  '(c-default-style (quote ((c-mode . "linux") (c++-mode . "linux") (java-mode . "java") (awk-mode . "awk") (other . "linux"))))
  '(c-max-one-liner-length 100)
@@ -197,12 +199,12 @@
  '(compilation-search-path (quote ("")))
  '(compilation-window-height 30)
  '(confirm-kill-emacs nil)
- '(custom-safe-themes (quote ("52849d123c41baae998e6ede45b8af06fae6fc6a2171c7dd80876862a87b936f" "ce8cf19bea146e116719eb681601a95c37887509a5d2f9d192a733e9779ebf16" "be82bcaee6fe58904eafcee9da696715d4c1acbc2a8146b976443a67895d423f" "85d8ec17aa31efc9515b82e2135b83d6d96237492e8d6368e70e289629268972" "c2fd7de1f36cb91839a4cedd3aa9f35d9ddc007fc09dc18940b0f9f72cda08d6" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "579e9950513524d8739e08eae289419cfcb64ed9b7cc910dd2e66151c77975c4" "cd70962b469931807533f5ab78293e901253f5eeb133a46c2965359f23bfb2ea" "f0ea6118d1414b24c2e4babdc8e252707727e7b4ff2e791129f240a2b3093e32" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" default)))
  '(debug-on-error nil)
  '(delete-by-moving-to-trash t)
  '(delete-old-versions t)
  '(delete-selection-mode t)
  '(develock-auto-enable nil)
+ '(diary-entry-marker (quote font-lock-variable-name-face))
  '(dired-auto-revert-buffer t)
  '(ecb-add-path-for-not-matching-files (quote (t)))
  '(ecb-layout-name "left13")
@@ -216,10 +218,11 @@
  '(ediff-split-window-function (quote split-window-horizontally))
  '(electric-indent-mode nil)
  '(elpy-default-minor-modes (quote (eldoc-mode)))
- '(elpy-rpc-backend "jedi")
+ '(elpy-rpc-backend "rope")
  '(elpy-rpc-project-specific t)
  '(enable-remote-dir-locals t)
  '(eval-expression-debug-on-error nil)
+ '(fci-rule-color "#2e2e2e")
  '(flx-ido-mode t)
  '(flycheck-check-syntax-automatically (quote (save new-line mode-enabled)))
  '(flycheck-completion-system nil)
@@ -249,7 +252,6 @@
  '(ibuffer-default-sorting-mode (quote major-mode))
  '(ibuffer-eliding-string "..")
  '(ido-enable-flex-matching t)
- '(ido-mode (quote file) nil (ido))
  '(ido-use-filename-at-point (quote guess))
  '(ido-use-url-at-point t)
  '(ido-vertical-mode t)
@@ -260,16 +262,13 @@
  '(isearch-allow-scroll t)
  '(ispell-dictionary "english")
  '(js2-mode-show-parse-errors nil)
+ '(kill-ring-max 200)
  '(magit-use-overlays nil)
  '(make-backup-files t)
  '(mk-proj-use-ido-selection t)
  '(mouse-avoidance-mode (quote banish) nil (avoid))
-<<<<<<< HEAD
- '(mouse-wheel-scroll-amount (quote (3 ((shift) . 1) ((control)))))
-=======
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount (quote (8 ((shift) . 1) ((control)))))
->>>>>>> a32b46759b527a50150e6fb3546c619c95e094dd
  '(mouse-yank-at-point t)
  '(next-error-recenter (quote (4)))
  '(ns-command-modifier (quote meta))
@@ -291,6 +290,8 @@
  '(recentf-max-saved-items 1000)
  '(recentf-mode t)
  '(remember-data-file "~/.agenda.org")
+ '(rm-blacklist " hl-p\\| FIC\\| yas\\| VHl\\| Helm\\| AC\\| SP\\| hl-s\\| ||\\| Google\\| WSC\\| ws\\| UT\\| company\\| back\\| Anzu\\| Guide\\| hs\\| Projectile\\[?.*\\]?")
+ '(rm-excluded-modes " hl-p\\| FIC\\| yas\\| VHl\\| Helm\\| AC\\| SP\\| hl-s\\| ||\\| Google\\| WSC\\| ws\\| UT\\| company\\| back\\| Anzu\\| Guide\\| hs\\| Projectile\\[?.*\\]?")
  '(ropemacs-completing-read-function (quote completing-read))
  '(ropemacs-enable-shortcuts nil)
  '(ropemacs-local-prefix nil)
@@ -306,12 +307,7 @@
  '(smart-tab-using-hippie-expand t)
  '(smartparens-global-mode t)
  '(smex-history-length 30)
-<<<<<<< HEAD
- '(sml/hidden-modes (quote (" hl-p" " FIC" " yas" " VHl" " Helm" " AC" " SP" " hl-s" " ||" " Google" " WSC" " ws" " UT" " company" " back" " Anzu" " Guide" " hs")))
- '(sml/use-projectile-p nil)
-=======
- '(sml/hidden-modes " hl-p\\| FIC\\| yas\\| VHl\\| Helm\\| AC\\| SP\\| hl-s\\| ||\\| Google\\| WSC\\| ws\\| UT\\| company\\| back\\| Anzu\\| Guide\\| hs\\| Projectile\\[.*\\]")
->>>>>>> a32b46759b527a50150e6fb3546c619c95e094dd
+ '(sml/hidden-modes " hl-p\\| FIC\\| yas\\| VHl\\| Helm\\| AC\\| SP\\| hl-s\\| ||\\| Google\\| WSC\\| ws\\| UT\\| company\\| back\\| Anzu\\| Guide\\| hs\\| Projectile\\[?.*\\]?")
  '(sml/vc-mode-show-backend t)
  '(sp-autoescape-string-quote nil)
  '(speedbar-show-unknown-files t)
@@ -320,7 +316,7 @@
  '(sr-speedbar-right-side nil)
  '(sr-speedbar-skip-other-window-p t)
  '(sublimity-mode t)
- '(sublimity-scroll-drift-length 1)
+ '(sublimity-scroll-drift-length 2)
  '(sublimity-scroll-weight 7)
  '(svn-log-edit-show-diff-for-commit t)
  '(svn-status-default-blame-arguments (quote ("-x" "--ignore-eol-style" "-g")))
@@ -333,6 +329,7 @@
  '(tabkey2-mode t)
  '(tabkey2-show-message-on-enter 2.0)
  '(tool-bar-mode nil)
+ '(tramp-default-method "rsyncc")
  '(tramp-remote-path (quote (tramp-default-remote-path tramp-own-remote-path)))
  '(tramp-verbose 5)
  '(truncate-lines t)
@@ -353,10 +350,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "DejaVu Sans" :foundry "unknown" :slant normal :weight normal :height 100 :width normal))))
- '(company-tooltip ((t (:background "#4F4F4F" :foreground "#F0DFAF" :family "DejaVu Sans Mono"))))
- '(ecb-default-general-face ((t (:height 0.9))) t)
- '(highlight-symbol-face ((t (:background "dim gray")))))
+ '(default ((t (:family "DejaVu Sans" :foundry "unknown" :slant normal :weight normal :height 98 :width normal))))
+ '(ecb-default-general-face ((t (:height 0.9))) t))
 
 
 
@@ -370,10 +365,7 @@
 (require 'smartparens-html)
 (require 'volatile-highlights)
 (require 'move-text)
-<<<<<<< HEAD
 (require 'diminish)
-=======
->>>>>>> a32b46759b527a50150e6fb3546c619c95e094dd
 (require 'sublimity)
 (require 'sublimity-scroll)
 (require 'company)
@@ -396,14 +388,14 @@
 ;; (setq jedi:complete-on-dot t)                 ; optional
 (setq helm-gtags-mode 1)
 (setq sml/vc-mode-show-backend t)
-(add-to-list 'company-backends 'company-anaconda)
+;;(add-to-list 'company-backends 'company-anaconda)
 
 (setq guide-key/guide-key-sequence '("C-x r" "C-x v" "C-x 4" "C-x 5" "C-c" "C-c p" "C-c p 4""C-c /" "C-c ." "C-c . l" "C-c . g" "C-c . m" "C-c &" "C-x c" "C-c !" "C-c C-t" "C-c C-e" "C-c C-d" "C-c C-b" "C-x x" "C-c @" "C-c C-t" "C-x p" "C-x p n" "C-x p 4"))
 (volatile-highlights-mode t)
 
 
 (setq-default frame-title-format
-              (list '((buffer-file-name "emacs %f" (dired-directory
+              (list '((buffer-file-name "%f - emacs" (dired-directory
                                                       dired-directory
                                                       (revert-buffer-function " %b"
                                                                               ("%b – Dir:  " default-directory)))))))
@@ -437,10 +429,7 @@
     (company-mode)
 	(yas-minor-mode)
 	(nlinum-mode)
-<<<<<<< HEAD
-=======
 	(which-func-mode)
->>>>>>> a32b46759b527a50150e6fb3546c619c95e094dd
 	;; (dopemacs-font-lock-operators)
 	;; (rainbow-delimiters-mode)
 	(modify-syntax-entry ?_ "w")
@@ -458,8 +447,8 @@
 ;; (add-hook 'special-mode-hook 'dopemacs-fixed-width-font)
 (add-hook 'dired-mode-hook 'dopemacs-fixed-width-font)
 (add-hook 'dired-load-hook (lambda () (load "dired-x")))
-(add-hook 'python-mode-hook 'anaconda-mode)
-(add-hook 'python-mode-hook 'anaconda-eldoc)
+;;(add-hook(add-hook 'python-mode-hook 'anaconda-mode)
+;;(add-hook 'python-mode-hook 'anaconda-eldoc)
 (add-hook 'jsx-mode-hook (lambda () (flycheck-select-checker 'jsxhint-checker) (flycheck-mode)))
 
 ;; Workaround for bug of ecb and winner-mode:
@@ -494,11 +483,11 @@
 ;; ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-(global-set-key "\M-x" 'helm-M-x)
+ (global-set-key "\M-x" 'helm-M-x)
 (global-set-key (kbd "<menu>") 'helm-mini)
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-j") 'helm-select-action)
-;; (define-key global-map [remap find-file] 'helm-find-files)
+(define-key global-map [remap find-file] 'helm-find-files)
 (define-key global-map [remap occur] 'helm-occur)
 (define-key global-map [remap list-buffers] 'helm-buffers-list)
 (define-key global-map [remap dabbrev-expand] 'helm-dabbrev)
@@ -535,8 +524,8 @@
 (global-set-key (kbd "M-_") 'undo-tree-redo)
 (global-set-key (kbd "C-;") 'iedit-mode)
 (global-set-key (kbd "M-o") 'other-window)
-(global-set-key (kbd "C-º") 'hippie-expand)
-(global-set-key (kbd "M-SPC") 'company-complete)
+(global-set-key (kbd "C-º") 'company-complete)
+(global-set-key (kbd "M-SPC") 'hippie-expand)
 (global-set-key (kbd "C-ñ") 'helm-mini)
 (global-set-key (kbd "C-Ñ") 'hs-toggle-hiding)
 (global-set-key (kbd "<C-dead-acute>") 'hs-toggle-hiding)
@@ -659,8 +648,7 @@
        (dopemacs-toggle-fullscreen)))
 
 (helm-mode 1)
-;; (load-theme 'jujube)
-(load-theme 'my-zenburn)
+(load-theme 'ritchie)
 (sml/setup)
 ;; (elpy-enable)
 ;; (delq 'flymake-mode elpy-default-minor-modes)
