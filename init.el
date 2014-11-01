@@ -15,13 +15,20 @@
 
 (when (>= emacs-major-version 24)
   (setq package-list '(
+					   ;; pymacs
                        ;; auto-complete
                        ;; fixmee
                        ;; rainbow-mode
                        ;; smartrep
                        ;; virtualenvwrapper
-						  ;; anaconda-mode
-						  ;; pymacs
+					   anaconda-mode
+					   anchored-transpose
+					   julia-mode
+					   kivy-mode
+					   ninja-mode
+					   paradox
+					   rust-mode
+					   thrift
                        ac-js2
                        ace-jump-mode
                        ack-and-a-half
@@ -105,10 +112,10 @@
                        multiple-cursors
                        nlinum
                        nyan-mode
+                       persp-projectile
+                       perspective
                        php-mode
                        pkgbuild-mode
-                       perspective
-                       persp-projectile
                        popwin
                        projectile
                        rainbow-delimiters
@@ -125,13 +132,14 @@
                        smartparens
                        string-inflection
                        stylus-mode
-                       sublimity
                        sublime-themes
+                       sublimity
                        sunrise-commander
                        syslog-mode
                        textile-mode
                        tidy
                        tuareg
+                       twig-mode
                        undo-tree
                        vimrc-mode
                        volatile-highlights
@@ -168,7 +176,6 @@
 ;; ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -183,7 +190,13 @@
  '(blink-cursor-interval 0.1)
  '(blink-cursor-mode nil)
  '(c-basic-offset 4)
- '(c-default-style (quote ((c-mode . "linux") (c++-mode . "linux") (java-mode . "java") (awk-mode . "awk") (other . "linux"))))
+ '(c-default-style
+   (quote
+  ((c-mode . "linux")
+   (c++-mode . "linux")
+   (java-mode . "java")
+   (awk-mode . "awk")
+   (other . "linux"))))
  '(c-max-one-liner-length 100)
  '(c-report-syntactic-errors t)
  '(comint-buffer-maximum-size 10240)
@@ -208,11 +221,12 @@
  '(dired-auto-revert-buffer t)
  '(ecb-add-path-for-not-matching-files (quote (t)))
  '(ecb-layout-name "left13")
- '(ecb-layout-window-sizes (quote (("left13" (ecb-directories-buffer-name 0.12213740458015267 . 0.9833333333333333)))))
+ '(ecb-layout-window-sizes
+   (quote
+  (("left13"
+    (ecb-directories-buffer-name 0.12213740458015267 . 0.9833333333333333)))))
  '(ecb-options-version "2.40")
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
- '(ecb-source-file-regexps (quote ((".*" ("\\(^\\(\\.\\|#\\)\\|\\(~$\\|\\.\\(elc\\|obj\\|o\\|class\\|lib\\|dll\\|a\\|so\\|cache\\|pyc\\)$\\)\\)") ("^\\.\\(emacs\\|gnus\\)$")))))
- '(ecb-source-path (quote (("/" "/") ("/home/k/proyectos" "proyectos") (#("/home/k/sandbox" 0 15 (help-echo "Mouse-2 toggles maximizing, mouse-3 displays a popup-menu")) "sandbox"))))
  '(ecb-tip-of-the-day nil)
  '(ecb-windows-width 0.25)
  '(ediff-split-window-function (quote split-window-horizontally))
@@ -278,6 +292,7 @@
  '(org-agenda-todo-list-sublevels nil)
  '(org-default-notes-file "~/.notes.org")
  '(ourcomments-ido-ctrl-tab t)
+ '(paradox-github-token t)
  '(powerline-text-scale-factor 0.8)
  '(proced-auto-update-interval 1)
  '(projectile-completion-system (quote completing-read))
@@ -290,15 +305,18 @@
  '(recentf-max-saved-items 1000)
  '(recentf-mode t)
  '(remember-data-file "~/.agenda.org")
- '(rm-blacklist " hl-p\\| FIC\\| yas\\| VHl\\| Helm\\| AC\\| SP\\| hl-s\\| ||\\| Google\\| WSC\\| ws\\| UT\\| company\\| back\\| Anzu\\| Guide\\| hs\\| Projectile\\[?.*\\]?")
- '(rm-excluded-modes " hl-p\\| FIC\\| yas\\| VHl\\| Helm\\| AC\\| SP\\| hl-s\\| ||\\| Google\\| WSC\\| ws\\| UT\\| company\\| back\\| Anzu\\| Guide\\| hs\\| Projectile\\[?.*\\]?")
+ '(rm-blacklist
+   " hl-p\\| FIC\\| yas\\| VHl\\| Helm\\| AC\\| SP\\| hl-s\\| ||\\| Google\\| WSC\\| ws\\| UT\\| company\\| back\\| Anzu\\| Guide\\| hs\\| Projectile\\[?.*\\]?")
+ '(rm-excluded-modes
+   " hl-p\\| FIC\\| yas\\| VHl\\| Helm\\| AC\\| SP\\| hl-s\\| ||\\| Google\\| WSC\\| ws\\| UT\\| company\\| back\\| Anzu\\| Guide\\| hs\\| Projectile\\[?.*\\]?")
  '(ropemacs-completing-read-function (quote completing-read))
  '(ropemacs-enable-shortcuts nil)
  '(ropemacs-local-prefix nil)
- '(safe-local-variable-values (quote ((web-mode-markup-indent-offset . 2) (ack-and-a-half-arguments "--ignore-dir=static/vendor --ignore-dir=static/bower_components --ignore-dir=log"))))
  '(save-interprogram-paste-before-kill nil)
  '(save-place t nil (saveplace))
- '(savehist-additional-variables (quote (kill-ring mark-ring global-mark-ring search-ring regexp-search-ring extended-command-history compile-command)))
+ '(savehist-additional-variables
+   (quote
+  (kill-ring mark-ring global-mark-ring search-ring regexp-search-ring extended-command-history compile-command)))
  '(savehist-mode t nil (savehist))
  '(scroll-bar-mode nil)
  '(semantic-idle-scheduler-idle-time 1)
@@ -307,7 +325,9 @@
  '(smart-tab-using-hippie-expand t)
  '(smartparens-global-mode t)
  '(smex-history-length 30)
- '(sml/hidden-modes " hl-p\\| FIC\\| yas\\| VHl\\| Helm\\| AC\\| SP\\| hl-s\\| ||\\| Google\\| WSC\\| ws\\| UT\\| company\\| back\\| Anzu\\| Guide\\| hs\\| Projectile\\[?.*\\]?")
+ '(sml/hidden-modes
+   " hl-p\\| FIC\\| yas\\| VHl\\| Helm\\| AC\\| SP\\| hl-s\\| ||\\| Google\\| WSC\\| ws\\| UT\\| company\\| back\\| Anzu\\| Guide\\| hs\\| Projectile\\[?.*\\]?")
+ '(sml/theme (quote light))
  '(sml/vc-mode-show-backend t)
  '(sp-autoescape-string-quote nil)
  '(speedbar-show-unknown-files t)
@@ -325,10 +345,11 @@
  '(tab-stop-list (quote (4 8 12 16 20 24 28 32 36 40)))
  '(tab-width 4)
  '(tabkey2-completion-lighter-on t)
- '(tabkey2-first-key "	")
+ '(tabkey2-first-key "  ")
  '(tabkey2-mode t)
  '(tabkey2-show-message-on-enter 2.0)
  '(tool-bar-mode nil)
+ '(tramp-completion-reread-directory-timeout nil)
  '(tramp-default-method "rsyncc")
  '(tramp-remote-path (quote (tramp-default-remote-path tramp-own-remote-path)))
  '(tramp-verbose 5)
@@ -344,6 +365,7 @@
  '(wget-download-directory "~/Downloads")
  '(whitespace-style (quote (space-before-tab indentation space-after-tab)))
  '(winner-mode t nil (winner)))
+
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -365,7 +387,6 @@
 (require 'smartparens-html)
 (require 'volatile-highlights)
 (require 'move-text)
-(require 'diminish)
 (require 'sublimity)
 (require 'sublimity-scroll)
 (require 'company)
@@ -388,10 +409,16 @@
 ;; (setq jedi:complete-on-dot t)                 ; optional
 (setq helm-gtags-mode 1)
 (setq sml/vc-mode-show-backend t)
-;;(add-to-list 'company-backends 'company-anaconda)
+;; (add-to-list 'company-backends 'company-anaconda)
 
 (setq guide-key/guide-key-sequence '("C-x r" "C-x v" "C-x 4" "C-x 5" "C-c" "C-c p" "C-c p 4""C-c /" "C-c ." "C-c . l" "C-c . g" "C-c . m" "C-c &" "C-x c" "C-c !" "C-c C-t" "C-c C-e" "C-c C-d" "C-c C-b" "C-x x" "C-c @" "C-c C-t" "C-x p" "C-x p n" "C-x p 4"))
 (volatile-highlights-mode t)
+
+;; Disable version control in tramp:
+(setq vc-ignore-dir-regexp
+                (format "\\(%s\\)\\|\\(%s\\)"
+                        vc-ignore-dir-regexp
+                        tramp-file-name-regexp))
 
 
 (setq-default frame-title-format
@@ -425,30 +452,39 @@
 
 ;; HOOKS :
 ;; ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+(defun dopemacs-text-mode-hook ()
+  (nlinum-mode)
+  (modify-syntax-entry ?_ "w")
+  (modify-syntax-entry ?- "w")
+  (local-set-key "\C-j"  'join-line)
+  (local-set-key (kbd "RET")  'newline-and-indent)
+  )
+
 (defun dopemacs-prog-mode-hook ()
-    (company-mode)
-	(yas-minor-mode)
-	(nlinum-mode)
-	(which-func-mode)
-	;; (dopemacs-font-lock-operators)
-	;; (rainbow-delimiters-mode)
-	(modify-syntax-entry ?_ "w")
-	(modify-syntax-entry ?- "w")
-	(highlight-symbol-mode)
-	(local-set-key "\C-j"  'join-line)
-	(local-set-key (kbd "RET")  'newline-and-indent)
-	;; (whitespace-mode)
-	(volatile-highlights-mode)
-	(hs-minor-mode)
-	)
+  (company-mode)
+  (yas-minor-mode)
+  (which-func-mode)
+  ;; (dopemacs-font-lock-operators)
+  ;; (rainbow-delimiters-mode)
+  (highlight-symbol-mode)
+  ;; (whitespace-mode)
+  (volatile-highlights-mode)
+  (hs-minor-mode)
+  (nlinum-mode)
+  (modify-syntax-entry ?_ "w")
+  (modify-syntax-entry ?- "w")
+  (local-set-key "\C-j"  'join-line)
+  (local-set-key (kbd "RET")  'newline-and-indent)
+  )
 
 (add-hook 'prog-mode-hook 'dopemacs-prog-mode-hook)
+(add-hook 'text-mode-hook 'dopemacs-text-mode-hook)
 (add-hook 'text-mode-hook 'dopemacs-fixed-width-font)
 ;; (add-hook 'special-mode-hook 'dopemacs-fixed-width-font)
 (add-hook 'dired-mode-hook 'dopemacs-fixed-width-font)
 (add-hook 'dired-load-hook (lambda () (load "dired-x")))
-;;(add-hook(add-hook 'python-mode-hook 'anaconda-mode)
-;;(add-hook 'python-mode-hook 'anaconda-eldoc)
+;; (add-hook 'python-mode-hook 'anaconda-mode)
+;; (add-hook 'python-mode-hook 'anaconda-eldoc)
 (add-hook 'jsx-mode-hook (lambda () (flycheck-select-checker 'jsxhint-checker) (flycheck-mode)))
 
 ;; Workaround for bug of ecb and winner-mode:
@@ -472,6 +508,7 @@
 (add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
 (add-to-list 'auto-mode-alist '("\\.zsh$" . sh-mode))
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.html\.twig$" . web-mode))
 
 
 
@@ -484,7 +521,7 @@
 
 
  (global-set-key "\M-x" 'helm-M-x)
-(global-set-key (kbd "<menu>") 'helm-mini)
+(global-set-key (kbd "<menu>") 'er/expand-region)
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-j") 'helm-select-action)
 (define-key global-map [remap find-file] 'helm-find-files)
@@ -503,7 +540,7 @@
 (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
-(global-set-key (kbd "C-=") 'er/expand-region)
+(global-set-key (kbd "<menu>") 'er/expand-region)
 (global-set-key (kbd "<M-S-up>") 'move-text-up)
 (global-set-key (kbd "<M-S-down>") 'move-text-down)
 
@@ -525,6 +562,7 @@
 (global-set-key (kbd "C-;") 'iedit-mode)
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "C-º") 'company-complete)
+(global-set-key (kbd "C-x t") 'anchored-transpose)
 (global-set-key (kbd "M-SPC") 'hippie-expand)
 (global-set-key (kbd "C-ñ") 'helm-mini)
 (global-set-key (kbd "C-Ñ") 'hs-toggle-hiding)
