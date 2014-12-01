@@ -67,9 +67,9 @@
                        gitconfig-mode
                        go-mode
                        google-this
+					   google-translate
                        grizzl
                        groovy-mode
-                       guess-offset
                        guide-key-tip
                        haml-mode
                        haskell-mode
@@ -101,6 +101,7 @@
                        js2-mode
                        json-mode
                        less-css-mode
+					   lua-mode
                        magit
                        manage-minor-mode
                        mark-tools
@@ -114,6 +115,7 @@
                        nyan-mode
                        persp-projectile
                        perspective
+					   php-eldoc
                        php-mode
                        pkgbuild-mode
                        popwin
@@ -130,6 +132,7 @@
                        slime
                        smart-mode-line
                        smartparens
+					   sqlup-mode
                        string-inflection
                        stylus-mode
                        sublime-themes
@@ -143,7 +146,6 @@
                        undo-tree
                        vimrc-mode
                        volatile-highlights
-                       w3m
                        web-mode
                        wgrep
                        wgrep-helm
@@ -192,11 +194,11 @@
  '(c-basic-offset 4)
  '(c-default-style
    (quote
-  ((c-mode . "linux")
-   (c++-mode . "linux")
-   (java-mode . "java")
-   (awk-mode . "awk")
-   (other . "linux"))))
+	((c-mode . "linux")
+	 (c++-mode . "linux")
+	 (java-mode . "java")
+	 (awk-mode . "awk")
+	 (other . "linux"))))
  '(c-max-one-liner-length 100)
  '(c-report-syntactic-errors t)
  '(comint-buffer-maximum-size 10240)
@@ -220,23 +222,42 @@
  '(diary-entry-marker (quote font-lock-variable-name-face))
  '(dired-auto-revert-buffer t)
  '(ecb-add-path-for-not-matching-files (quote (t)))
- '(ecb-layout-name "left13")
+ '(ecb-auto-expand-tag-tree (quote all))
+ '(ecb-layout-name "left15")
  '(ecb-layout-window-sizes
    (quote
-  (("left13"
-    (ecb-directories-buffer-name 0.12213740458015267 . 0.9833333333333333)))))
+	(("left15"
+	  (ecb-directories-buffer-name 0.1444866920152091 . 0.5967741935483871)
+	  (ecb-methods-buffer-name 0.1444866920152091 . 0.3870967741935484))
+	 ("left13"
+	  (ecb-directories-buffer-name 0.12213740458015267 . 0.9833333333333333)))))
+ '(ecb-methods-menu-sorter nil)
  '(ecb-options-version "2.40")
  '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
+ '(ecb-source-file-regexps
+   (quote
+	((".*"
+	  ("\\(^\\(\\.\\|#\\)\\|\\(~$\\|\\.\\(elc\\|obj\\|o\\|class\\|lib\\|dll\\|a\\|so\\|cache\\|pyc\\)$\\)\\)")
+	  ("^\\.\\(emacs\\|gnus\\)$")))))
+ '(ecb-source-path
+   (quote
+	(("/home/k/proyectos" "proyectos")
+	 (#("/home/k/sandbox" 0 15
+		(help-echo "Mouse-2 toggles maximizing, mouse-3 displays a popup-menu"))
+	  "sandbox")
+	 ("/" "/"))))
  '(ecb-tip-of-the-day nil)
+ '(ecb-toggle-layout-sequence
+   (quote
+	("left1" "left2" "left3" "left4" "left5" "left6" "left7" "left8" "left9" "left10" "left11" "left12" "left13" "left14" "left15" "right1" "right2" "leftright1" "leftright2" "leftright3" "leftright-analyse" "left-analyse" "left-symboldef" "left-dir-plus-speedbar")))
  '(ecb-windows-width 0.25)
  '(ediff-split-window-function (quote split-window-horizontally))
- '(electric-indent-mode nil)
+ '(electric-indent-mode t)
  '(elpy-default-minor-modes (quote (eldoc-mode)))
  '(elpy-rpc-backend "rope")
  '(elpy-rpc-project-specific t)
  '(enable-remote-dir-locals t)
  '(eval-expression-debug-on-error nil)
- '(fci-rule-color "#2e2e2e")
  '(flx-ido-mode t)
  '(flycheck-check-syntax-automatically (quote (save new-line mode-enabled)))
  '(flycheck-completion-system nil)
@@ -250,6 +271,9 @@
  '(global-fixmee-mode t)
  '(global-flycheck-mode t nil (flycheck))
  '(global-hl-line-mode t)
+ '(global-prettify-symbols-mode t)
+ '(global-semantic-idle-breadcrumbs-mode t nil (semantic/idle))
+ '(global-superword-mode t)
  '(global-undo-tree-mode t)
  '(global-yascroll-bar-mode t)
  '(google-this-mode t)
@@ -258,6 +282,8 @@
  '(gud-tooltip-mode t)
  '(guide-key-mode t)
  '(guide-key-tip/enabled t)
+ '(helm-buffer-max-length nil)
+ '(helm-buffers-fuzzy-matching t)
  '(helm-c-ack-version 2.04)
  '(helm-descbinds-mode t)
  '(helm-match-plugin-mode t nil (helm-match-plugin))
@@ -282,7 +308,7 @@
  '(mk-proj-use-ido-selection t)
  '(mouse-avoidance-mode (quote banish) nil (avoid))
  '(mouse-wheel-progressive-speed nil)
- '(mouse-wheel-scroll-amount (quote (8 ((shift) . 1) ((control)))))
+ '(mouse-wheel-scroll-amount (quote (4 ((shift) . 1) ((control)))))
  '(mouse-yank-at-point t)
  '(next-error-recenter (quote (4)))
  '(ns-command-modifier (quote meta))
@@ -302,7 +328,7 @@
  '(read-buffer-completion-ignore-case t)
  '(read-file-name-completion-ignore-case t)
  '(recentf-auto-cleanup (quote never))
- '(recentf-max-saved-items 1000)
+ '(recentf-max-saved-items 200)
  '(recentf-mode t)
  '(remember-data-file "~/.agenda.org")
  '(rm-blacklist
@@ -316,7 +342,7 @@
  '(save-place t nil (saveplace))
  '(savehist-additional-variables
    (quote
-  (kill-ring mark-ring global-mark-ring search-ring regexp-search-ring extended-command-history compile-command)))
+	(kill-ring mark-ring global-mark-ring search-ring regexp-search-ring extended-command-history compile-command)))
  '(savehist-mode t nil (savehist))
  '(scroll-bar-mode nil)
  '(semantic-idle-scheduler-idle-time 1)
@@ -327,7 +353,7 @@
  '(smex-history-length 30)
  '(sml/hidden-modes
    " hl-p\\| FIC\\| yas\\| VHl\\| Helm\\| AC\\| SP\\| hl-s\\| ||\\| Google\\| WSC\\| ws\\| UT\\| company\\| back\\| Anzu\\| Guide\\| hs\\| Projectile\\[?.*\\]?")
- '(sml/theme (quote light))
+ '(sml/theme (quote dark))
  '(sml/vc-mode-show-backend t)
  '(sp-autoescape-string-quote nil)
  '(speedbar-show-unknown-files t)
@@ -350,12 +376,11 @@
  '(tabkey2-show-message-on-enter 2.0)
  '(tool-bar-mode nil)
  '(tramp-completion-reread-directory-timeout nil)
- '(tramp-default-method "rsyncc")
  '(tramp-remote-path (quote (tramp-default-remote-path tramp-own-remote-path)))
  '(tramp-verbose 5)
  '(truncate-lines t)
  '(undo-tree-mode-lighter " UT")
- '(uniquify-buffer-name-style (quote forward) nil (uniquify))
+ '(uniquify-buffer-name-style (quote post-forward-angle-brackets) nil (uniquify))
  '(use-dialog-box nil)
  '(visible-bell t)
  '(w3m-cookie-accept-bad-cookies (quote ask))
@@ -363,7 +388,6 @@
  '(w3m-use-cookies t)
  '(web-mode-disable-auto-pairing t)
  '(wget-download-directory "~/Downloads")
- '(whitespace-style (quote (space-before-tab indentation space-after-tab)))
  '(winner-mode t nil (winner)))
 
 
@@ -410,6 +434,7 @@
 (setq helm-gtags-mode 1)
 (setq sml/vc-mode-show-backend t)
 ;; (add-to-list 'company-backends 'company-anaconda)
+(put 'erase-buffer 'disabled nil)
 
 (setq guide-key/guide-key-sequence '("C-x r" "C-x v" "C-x 4" "C-x 5" "C-c" "C-c p" "C-c p 4""C-c /" "C-c ." "C-c . l" "C-c . g" "C-c . m" "C-c &" "C-x c" "C-c !" "C-c C-t" "C-c C-e" "C-c C-d" "C-c C-b" "C-x x" "C-c @" "C-c C-t" "C-x p" "C-x p n" "C-x p 4"))
 (volatile-highlights-mode t)
@@ -463,23 +488,27 @@
 (defun dopemacs-prog-mode-hook ()
   (company-mode)
   (yas-minor-mode)
-  (which-func-mode)
   ;; (dopemacs-font-lock-operators)
   ;; (rainbow-delimiters-mode)
   (highlight-symbol-mode)
-  ;; (whitespace-mode)
+  (which-func-mode)
   (volatile-highlights-mode)
-  (hs-minor-mode)
   (nlinum-mode)
   (modify-syntax-entry ?_ "w")
   (modify-syntax-entry ?- "w")
   (local-set-key "\C-j"  'join-line)
   (local-set-key (kbd "RET")  'newline-and-indent)
+  (ignore-errors (hs-minor-mode))
+  ;;  (whitespace-mode)
+  (dopemacs-remove-dos-eol)
+  (semantic-mode)
   )
 
 (add-hook 'prog-mode-hook 'dopemacs-prog-mode-hook)
 (add-hook 'text-mode-hook 'dopemacs-text-mode-hook)
 (add-hook 'text-mode-hook 'dopemacs-fixed-width-font)
+;; (add-hook 'tabulated-list-mode-hook 'dopemacs-fixed-width-font)
+(add-hook 'comint-mode-hook 'dopemacs-fixed-width-font)
 ;; (add-hook 'special-mode-hook 'dopemacs-fixed-width-font)
 (add-hook 'dired-mode-hook 'dopemacs-fixed-width-font)
 (add-hook 'dired-load-hook (lambda () (load "dired-x")))
@@ -500,17 +529,25 @@
 ;; ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 (add-to-list 'auto-mode-alist '("\\.ui$" . nxml-mode))
-(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.xslt\\'" . nxml-mode))
-(add-to-list 'auto-mode-alist '("\\.xsl\\'$" . nxml-mode))
-(add-to-list 'auto-mode-alist '("\\.xsd\\'$" . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.xslt$" . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.xsl$" . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.xsd$" . nxml-mode))
 (add-to-list 'auto-mode-alist '("configure\\(\\.in\\)?\\'" . autoconf-mode))
 (add-to-list 'auto-mode-alist '("\\.bat$" . dos-mode))
 (add-to-list 'auto-mode-alist '("\\.zsh$" . sh-mode))
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.js$" . js-mode))
+(add-to-list 'auto-mode-alist '("\\.zsh$" . sh-mode))
+(add-to-list 'auto-mode-alist '("\\.cnf$" . conf-mode))
+(add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\.twig$" . web-mode))
-
-
+(add-to-list 'auto-mode-alist '("\\.blade\\.php$" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 
 
 
@@ -540,7 +577,8 @@
 (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
-(global-set-key (kbd "<menu>") 'er/expand-region)
+(global-set-key (kbd "<menu>") 'save-buffer)
+(global-set-key (kbd "<C-menu>") 'save-buffer)
 (global-set-key (kbd "<M-S-up>") 'move-text-up)
 (global-set-key (kbd "<M-S-down>") 'move-text-down)
 
@@ -566,23 +604,25 @@
 (global-set-key (kbd "M-SPC") 'hippie-expand)
 (global-set-key (kbd "C-ñ") 'helm-mini)
 (global-set-key (kbd "C-Ñ") 'hs-toggle-hiding)
-(global-set-key (kbd "<C-dead-acute>") 'hs-toggle-hiding)
+(global-set-key (kbd "<C-dead-acute>") (lambda () (interactive) (repeat-complex-command 0)))
 (global-set-key (kbd "<C-dead-grave>") 'helm-projectile)
 
 (global-set-key "\C-ca" 'projectile-ag)
 (global-set-key "\C-cb" 'magit-blame-mode)
 (global-set-key "\C-cc" 'compile)
-(global-set-key "\C-ce" 'package-list-packages-no-fetch)
+(global-set-key "\C-ce" 'er/expand-region)
 (global-set-key "\C-cf" 'helm-recentf)
 (global-set-key "\C-cg" 'rgrep)
 (global-set-key "\C-ch" 'hs-toggle-hiding)
 (global-set-key "\C-ci" 'string-inflection-cycle)
 (global-set-key "\C-cj" 'dired-at-point)
-(global-set-key "\C-cl" 'google-lucky-search)
+(global-set-key "\C-ck" 'dopemacs-select-current-line)
+(global-set-key "\C-cl" 'google-this-lucky-search)
 (global-set-key "\C-cm" 'magit-status)
 (global-set-key "\C-cn" 'manage-minor-mode)
 (global-set-key "\C-co" 'magit-log)
 ;; (global-set-key "\C-cp") ;; reserved for Projectile
+(global-set-key "\C-cq" 'google-translate-at-point)
 (global-set-key "\C-cr" 'revert-buffer)
 (global-set-key "\C-cs" 'multi-term)
 (global-set-key "\C-ct" 'toggle-truncate-lines)
@@ -592,12 +632,13 @@
 (global-set-key "\C-cx" 'dopemacs-split-window)
 
 
-(global-set-key (kbd "<f6>") 'magit-status)
+(global-set-key (kbd "<f5>") 'menu-bar-mode)
+(global-set-key (kbd "<f6>") 'ecb-toggle-layout)
 (global-set-key (kbd "<f7>") 'windresize)
 (global-set-key (kbd "<f8>") 'ecb-minor-mode)
 (global-set-key (kbd "<f9>") 'sr-speedbar-toggle)
-(global-set-key (kbd "<f10>") 'sunrise)
 (global-set-key (kbd "<f11>") 'dopemacs-toggle-fullscreen)
+(global-set-key (kbd "<f12>") 'sunrise)
 
 
 
@@ -686,11 +727,11 @@
        (dopemacs-toggle-fullscreen)))
 
 (helm-mode 1)
-(load-theme 'ritchie)
+
 (sml/setup)
 ;; (elpy-enable)
 ;; (delq 'flymake-mode elpy-default-minor-modes)
-
+(load-theme 'my-zenburn)
 
 
 
