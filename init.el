@@ -23,6 +23,7 @@
                        ;; virtualenvwrapper
 					   anaconda-mode
 					   anchored-transpose
+					   auto-package-update
 					   julia-mode
 					   kivy-mode
 					   ninja-mode
@@ -37,6 +38,7 @@
                        apache-mode
                        back-button
                        browse-kill-ring
+					   php-boris
                        buffer-move
                        clojure-mode
                        cmake-mode
@@ -66,6 +68,7 @@
                        fuzzy
                        gitconfig-mode
                        go-mode
+					   god-mode
                        google-this
 					   google-translate
                        grizzl
@@ -101,8 +104,10 @@
                        js2-mode
                        json-mode
                        less-css-mode
+					   let-alist
 					   lua-mode
                        magit
+					   magit-filenotify
                        manage-minor-mode
                        mark-tools
                        markdown-mode
@@ -157,7 +162,7 @@
   
   (require 'package)
 
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+  (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
   (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
   (add-to-list 'package-archives '("SC"   . "http://joseito.republika.pl/sunrise-commander/") t)
 
@@ -202,7 +207,9 @@
  '(c-max-one-liner-length 100)
  '(c-report-syntactic-errors t)
  '(comint-buffer-maximum-size 10240)
+ '(comint-input-ignoredups t)
  '(comint-move-point-for-output t)
+ '(comint-prompt-read-only t)
  '(company-idle-delay 0.3)
  '(company-minimum-prefix-length 2)
  '(company-tooltip-limit 30)
@@ -223,10 +230,14 @@
  '(dired-auto-revert-buffer t)
  '(ecb-add-path-for-not-matching-files (quote (t)))
  '(ecb-auto-expand-tag-tree (quote all))
- '(ecb-layout-name "left15")
+ '(ecb-layout-name "left3")
  '(ecb-layout-window-sizes
    (quote
-	(("left15"
+	(("left3"
+	  (ecb-directories-buffer-name 0.13688212927756654 . 0.2857142857142857)
+	  (ecb-sources-buffer-name 0.13688212927756654 . 0.3392857142857143)
+	  (ecb-methods-buffer-name 0.13688212927756654 . 0.35714285714285715))
+	 ("left15"
 	  (ecb-directories-buffer-name 0.1444866920152091 . 0.5967741935483871)
 	  (ecb-methods-buffer-name 0.1444866920152091 . 0.3870967741935484))
 	 ("left13"
@@ -282,6 +293,7 @@
  '(gud-tooltip-mode t)
  '(guide-key-mode t)
  '(guide-key-tip/enabled t)
+ '(helm-buffer-details-flag nil)
  '(helm-buffer-max-length nil)
  '(helm-buffers-fuzzy-matching t)
  '(helm-c-ack-version 2.04)
@@ -301,6 +313,7 @@
  '(initial-scratch-message nil)
  '(isearch-allow-scroll t)
  '(ispell-dictionary "english")
+ '(js-flat-functions t)
  '(js2-mode-show-parse-errors nil)
  '(kill-ring-max 200)
  '(magit-use-overlays nil)
@@ -346,6 +359,7 @@
  '(savehist-mode t nil (savehist))
  '(scroll-bar-mode nil)
  '(semantic-idle-scheduler-idle-time 1)
+ '(send-mail-function (quote mailclient-send-it))
  '(show-smartparens-global-mode t)
  '(show-trailing-whitespace nil)
  '(smart-tab-using-hippie-expand t)
@@ -362,7 +376,7 @@
  '(sr-speedbar-right-side nil)
  '(sr-speedbar-skip-other-window-p t)
  '(sublimity-mode t)
- '(sublimity-scroll-drift-length 2)
+ '(sublimity-scroll-drift-length 1)
  '(sublimity-scroll-weight 7)
  '(svn-log-edit-show-diff-for-commit t)
  '(svn-status-default-blame-arguments (quote ("-x" "--ignore-eol-style" "-g")))
@@ -397,12 +411,14 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:family "DejaVu Sans" :foundry "unknown" :slant normal :weight normal :height 98 :width normal))))
- '(ecb-default-general-face ((t (:height 0.9))) t))
+ '(comint-highlight-input ((t nil)))
+ '(ecb-default-general-face ((t (:height 0.9)))))
 
 
 
 ;; GENERAL:
 ;; ------------------------------------------------------------------------------------------------------------------------------------------------------------------
+(auto-package-update-maybe)
 
 (add-to-list 'load-path "~/.emacs.d/my-elisp/")
 (require 'cl-lib)
@@ -431,7 +447,7 @@
       version-control t)       ; use versioned backups
 (setq web-mode-engines-alist '(( "django" . "\\.html$")))
 ;; (setq jedi:complete-on-dot t)                 ; optional
-(setq helm-gtags-mode 1)
+
 (setq sml/vc-mode-show-backend t)
 ;; (add-to-list 'company-backends 'company-anaconda)
 (put 'erase-buffer 'disabled nil)
@@ -453,14 +469,7 @@
                                                                               ("%b – Dir:  " default-directory)))))))
 
 
-(require 'flycheck)
-(flycheck-define-checker jsxhint-checker
-  "A JSX syntax and style checker based on JSXHint."
 
-  :command ("jsxhint" source)
-  :error-patterns
-  ((error line-start (1+ nonl) ": line " line ", col " column ", " (message) line-end))
-  :modes (jsx-mode js-mode js2-mode web-mode))
 
 
 (defadvice yank (before slick-copy activate)
@@ -514,7 +523,6 @@
 (add-hook 'dired-load-hook (lambda () (load "dired-x")))
 ;; (add-hook 'python-mode-hook 'anaconda-mode)
 ;; (add-hook 'python-mode-hook 'anaconda-eldoc)
-(add-hook 'jsx-mode-hook (lambda () (flycheck-select-checker 'jsxhint-checker) (flycheck-mode)))
 
 ;; Workaround for bug of ecb and winner-mode:
 ;; http://stackoverflow.com/questions/9389679/how-to-unload-a-mode-e-g-unload-ecb-to-restore-winner-el-functionality
@@ -577,6 +585,7 @@
 (global-set-key (kbd "<C-S-left>")   'buf-move-left)
 (global-set-key (kbd "<C-S-right>")  'buf-move-right)
 
+(global-set-key (kbd "<escape>") 'god-mode-all)
 (global-set-key (kbd "<menu>") 'save-buffer)
 (global-set-key (kbd "<C-menu>") 'save-buffer)
 (global-set-key (kbd "<M-S-up>") 'move-text-up)
@@ -606,6 +615,7 @@
 (global-set-key (kbd "C-Ñ") 'hs-toggle-hiding)
 (global-set-key (kbd "<C-dead-acute>") (lambda () (interactive) (repeat-complex-command 0)))
 (global-set-key (kbd "<C-dead-grave>") 'helm-projectile)
+(global-set-key (kbd "<C-menu>") 'helm-projectile)
 
 (global-set-key "\C-ca" 'projectile-ag)
 (global-set-key "\C-cb" 'magit-blame-mode)
@@ -633,8 +643,8 @@
 
 
 (global-set-key (kbd "<f5>") 'menu-bar-mode)
-(global-set-key (kbd "<f6>") 'ecb-toggle-layout)
-(global-set-key (kbd "<f7>") 'windresize)
+(global-set-key (kbd "<f6>") 'windresize)
+(global-set-key (kbd "<f7>") 'ecb-toggle-layout)
 (global-set-key (kbd "<f8>") 'ecb-minor-mode)
 (global-set-key (kbd "<f9>") 'sr-speedbar-toggle)
 (global-set-key (kbd "<f11>") 'dopemacs-toggle-fullscreen)
@@ -742,3 +752,5 @@
 
 
 
+
+(put 'downcase-region 'disabled nil)
