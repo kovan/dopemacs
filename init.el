@@ -9,6 +9,7 @@
 
 ;;; Code:
 
+
 ;; PACKAGES :
 ;; ------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -23,7 +24,6 @@
                        ;; virtualenvwrapper
 					   anaconda-mode
 					   anchored-transpose
-					   auto-package-update
 					   julia-mode
 					   kivy-mode
 					   ninja-mode
@@ -234,9 +234,9 @@
  '(ecb-layout-window-sizes
    (quote
 	(("left3"
-	  (ecb-directories-buffer-name 0.13688212927756654 . 0.2857142857142857)
-	  (ecb-sources-buffer-name 0.13688212927756654 . 0.3392857142857143)
-	  (ecb-methods-buffer-name 0.13688212927756654 . 0.35714285714285715))
+	  (ecb-directories-buffer-name 0.11406844106463879 . 0.2903225806451613)
+	  (ecb-sources-buffer-name 0.11406844106463879 . 0.3387096774193548)
+	  (ecb-methods-buffer-name 0.11406844106463879 . 0.3548387096774194))
 	 ("left15"
 	  (ecb-directories-buffer-name 0.1444866920152091 . 0.5967741935483871)
 	  (ecb-methods-buffer-name 0.1444866920152091 . 0.3870967741935484))
@@ -418,7 +418,7 @@
 
 ;; GENERAL:
 ;; ------------------------------------------------------------------------------------------------------------------------------------------------------------------
-(auto-package-update-maybe)
+
 
 (add-to-list 'load-path "~/.emacs.d/my-elisp/")
 (require 'cl-lib)
@@ -521,6 +521,7 @@
 ;; (add-hook 'special-mode-hook 'dopemacs-fixed-width-font)
 (add-hook 'dired-mode-hook 'dopemacs-fixed-width-font)
 (add-hook 'dired-load-hook (lambda () (load "dired-x")))
+(add-hook 'ediff-mode-hook 'dopemacs-fixed-width-font)
 ;; (add-hook 'python-mode-hook 'anaconda-mode)
 ;; (add-hook 'python-mode-hook 'anaconda-eldoc)
 
