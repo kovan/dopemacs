@@ -188,22 +188,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ack-and-a-half-executable "ack-grep")
- '(ack-executable (executable-find "ack-grep"))
- '(auto-hscroll-mode t)
- '(auto-save-default nil)
- '(back-button-mode t)
- '(backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))
- '(blink-cursor-interval 0.1)
- '(blink-cursor-mode nil)
- '(c-basic-offset 4)
- '(c-default-style
-   (quote
-	((c-mode . "linux")
-	 (c++-mode . "linux")
-	 (java-mode . "java")
-	 (awk-mode . "awk")
-	 (other . "linux"))))
  '(c-max-one-liner-length 100)
  '(c-report-syntactic-errors t)
  '(comint-buffer-maximum-size 10240)
@@ -221,6 +205,9 @@
  '(compilation-search-path (quote ("")))
  '(compilation-window-height 30)
  '(confirm-kill-emacs nil)
+ '(custom-safe-themes
+   (quote
+	("52849d123c41baae998e6ede45b8af06fae6fc6a2171c7dd80876862a87b936f" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
  '(debug-on-error nil)
  '(delete-by-moving-to-trash t)
  '(delete-old-versions t)
@@ -298,7 +285,6 @@
  '(helm-buffers-fuzzy-matching t)
  '(helm-c-ack-version 2.04)
  '(helm-descbinds-mode t)
- '(helm-match-plugin-mode t nil (helm-match-plugin))
  '(highlight-indentation-offset 2)
  '(history-length 100)
  '(ibuffer-default-sorting-mode (quote major-mode))
@@ -509,7 +495,6 @@
   (local-set-key (kbd "RET")  'newline-and-indent)
   (ignore-errors (hs-minor-mode))
   ;;  (whitespace-mode)
-  (dopemacs-remove-dos-eol)
   (semantic-mode)
   )
 

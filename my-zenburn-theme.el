@@ -217,11 +217,7 @@ Also bind `class' to ((class color) (min-colors 89))."
    `(popup-scroll-bar-background-face ((t (:background ,my-zenburn-bg-1))))
    `(popup-isearch-match ((t (:background ,my-zenburn-bg :foreground ,my-zenburn-fg))))
 ;;;;; company-mode
-<<<<<<< HEAD
    `(company-tooltip ((t (:foreground ,my-zenburn-yellow :background ,my-zenburn-bg))))
-=======
-   `(company-tooltip ((t (:foreground ,my-zenburn-yellow :background ,my-zenburn-bg+1))))
->>>>>>> a32b46759b527a50150e6fb3546c619c95e094dd
    `(company-tooltip-selection ((t (:foreground ,my-zenburn-fg :background ,my-zenburn-bg-1))))
    `(company-tooltip-mouse ((t (:background ,my-zenburn-bg-1))))
    `(company-tooltip-common ((t (:foreground ,my-zenburn-yellow :background ,my-zenburn-bg-1))))
