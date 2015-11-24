@@ -15,3 +15,7 @@ bookmarks.emacs
 url/
 session.*
 /el-get/
+image-dired
+semanticdb
+project-explorer-cache
+network-security.data
