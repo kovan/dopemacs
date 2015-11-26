@@ -1,4 +1,4 @@
-;;; init.el --- Initialization
+;;; init.el --- Initialization    -*- no-byte-compile: t -*-
 ;;; -*- coding: utf-8 -*-
 ;;; Commentary:
 ;;
@@ -27,7 +27,6 @@
 					   julia-mode
 					   kivy-mode
 					   ninja-mode
-					   paradox
 					   rust-mode
 					   thrift
                        ac-js2
@@ -168,8 +167,12 @@
   (add-to-list 'package-archives '("SC"   . "http://joseito.republika.pl/sunrise-commander/") t)
 
   ;; activate all the packages (in particular autoloads)
+  (setq load-prefer-newer t)
   (package-initialize)
-
+  (require 'auto-compile)
+  (auto-compile-on-load-mode)
+  (auto-compile-on-save-mode)
+  
   ;; fetch the list of packages available
   (unless package-archive-contents
     (package-refresh-contents))
@@ -208,16 +211,51 @@
  '(confirm-kill-emacs nil)
  '(custom-safe-themes
    (quote
-	("52849d123c41baae998e6ede45b8af06fae6fc6a2171c7dd80876862a87b936f" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
- '(debug-on-error nil)
- '(delete-by-moving-to-trash t)
- '(delete-old-versions t)
- '(delete-selection-mode t)
- '(develock-auto-enable nil)
- '(diary-entry-marker (quote font-lock-variable-name-face))
- '(dired-auto-revert-buffer t)
- '(dired-listing-switches "-al  --group-directories-first")
+	("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "52849d123c41baae998e6ede45b8af06fae6fc6a2171c7dd80876862a87b936f" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" default)))
+'(delete-by-moving-to-trash t)
+'(delete-old-versions t)
+'(delete-selection-mode t)
+'(develock-auto-enable nil)
+'(diary-entry-marker (quote font-lock-variable-name-face))
+'(dired-auto-revert-buffer t)
+'(dired-listing-switches "-al  --group-directories-first")
+ '(ecb-add-path-for-not-matching-files (quote (t)))
+ '(ecb-auto-expand-tag-tree (quote all))
+ '(ecb-layout-name "left3")
+ '(ecb-layout-window-sizes
+   (quote
+	(("left3"
+	  (ecb-directories-buffer-name 0.11406844106463879 . 0.2903225806451613)
+	  (ecb-sources-buffer-name 0.11406844106463879 . 0.3387096774193548)
+	  (ecb-methods-buffer-name 0.11406844106463879 . 0.3548387096774194))
+	 ("left15"
+	  (ecb-directories-buffer-name 0.1444866920152091 . 0.5967741935483871)
+	  (ecb-methods-buffer-name 0.1444866920152091 . 0.3870967741935484))
+	 ("left13"
+	  (ecb-directories-buffer-name 0.12213740458015267 . 0.9833333333333333)))))
+ '(ecb-methods-menu-sorter nil)
+ '(ecb-options-version "2.40")
+ '(ecb-primary-secondary-mouse-buttons (quote mouse-1--mouse-2))
+ '(ecb-source-file-regexps
+   (quote
+	((".*"
+	  ("\\(^\\(\\.\\|#\\)\\|\\(~$\\|\\.\\(elc\\|obj\\|o\\|class\\|lib\\|dll\\|a\\|so\\|cache\\|pyc\\)$\\)\\)")
+	  ("^\\.\\(emacs\\|gnus\\)$")))))
+ '(ecb-source-path
+   (quote
+	(("/home/k/proyectos" "proyectos")
+	 (#("/home/k/sandbox" 0 15
+		(help-echo "Mouse-2 toggles maximizing, mouse-3 displays a popup-menu"))
+	  "sandbox")
+	 ("/" "/"))))
+ '(ecb-tip-of-the-day nil)
+ '(ecb-toggle-layout-sequence
+   (quote
+	("left1" "left2" "left3" "left4" "left5" "left6" "left7" "left8" "left9" "left10" "left11" "left12" "left13" "left14" "left15" "right1" "right2" "leftright1" "leftright2" "leftright3" "leftright-analyse" "left-analyse" "left-symboldef" "left-dir-plus-speedbar")))
+ '(ecb-windows-width 0.25)
+ 
  '(ediff-split-window-function (quote split-window-horizontally))
+ 
  '(electric-indent-mode t)
  '(elpy-default-minor-modes (quote (eldoc-mode)))
  '(elpy-rpc-backend "rope")
@@ -230,7 +268,7 @@
  '(flymake-run-in-place nil)
  '(font-lock-maximum-decoration 5)
  '(git-commit-fill-column 9999)
- '(git-commit-mode-hook (quote (flyspell-mode)))
+ '(git-commit-mode-hook (quote (flyspell-mode)) t)
  '(git-commit-summary-max-length 9999)
  '(global-anzu-mode t)
  '(global-diff-hl-mode t)
@@ -277,7 +315,6 @@
  '(mouse-wheel-progressive-speed nil)
  '(mouse-wheel-scroll-amount (quote (4 ((shift) . 1) ((control)))))
  '(mouse-yank-at-point t)
- '(neo-dont-be-alone t)
  '(neo-smart-open t)
  '(next-error-recenter (quote (4)))
  '(ns-command-modifier (quote meta))
@@ -290,7 +327,7 @@
  '(package-selected-packages
    (quote
 	(project-explorer direx ztree neotree sr-speedbar yascroll yaml-mode windresize whitespace-cleanup-mode wgrep-helm web-mode volatile-highlights vimrc-mode undo-tree twig-mode tuareg tidy thrift textile-mode syslog-mode sunrise-commander sublimity sublime-themes stylus-mode string-inflection sqlup-mode smartparens smart-mode-line slime slim-mode sequential-command scss-mode scala-mode rust-mode recentf-ext rainbow-mode rainbow-delimiters pkgbuild-mode php-mode php-eldoc php-boris persp-projectile paradox nyan-mode nlinum ninja-mode multiple-cursors multi-term move-text minimap matlab-mode markdown-mode mark-tools manage-minor-mode magit-filenotify lua-mode less-css-mode kivy-mode julia-mode json-mode jquery-doc jinja2-mode jedi iflipb iedit ido-vertical-mode httprepl htmlize howdoi highlight-symbol helm-themes helm-swoop helm-pydoc helm-projectile helm-gtags helm-google helm-git-grep helm-git-files helm-flycheck helm-descbinds helm-company helm-chrome helm-ag helm-ack haskell-mode haml-mode guide-key-tip groovy-mode grizzl google-translate google-this god-mode go-mode gitconfig-mode fuzzy free-keys flx-ido fic-ext-mode feature-mode expand-region erlang elpy el-get editorconfig dos dired+ diff-hl debian-changelog-mode dart-mode d-mode cycbuf csv-nav csharp-mode coffee-mode cmake-mode clojure-mode buffer-move browse-kill-ring back-button apache-mode anzu anchored-transpose anaconda-mode ag ack-and-a-half ace-jump-mode ac-js2)))
- '(paradox-github-token t)
+ '(pe/cache-enabled nil)
  '(powerline-text-scale-factor 0.8)
  '(proced-auto-update-interval 1)
  '(projectile-completion-system (quote completing-read))
@@ -310,6 +347,10 @@
  '(ropemacs-completing-read-function (quote completing-read))
  '(ropemacs-enable-shortcuts nil)
  '(ropemacs-local-prefix nil)
+ '(safe-local-variable-values
+   (quote
+	((web-mode-markup-indent-offset . 2)
+	 (ack-and-a-half-arguments "--ignore-dir=static/vendor --ignore-dir=static/bower_components --ignore-dir=log"))))
  '(save-interprogram-paste-before-kill nil)
  '(save-place t nil (saveplace))
  '(savehist-additional-variables
@@ -610,7 +651,9 @@
 
 (global-set-key (kbd "<f5>") 'menu-bar-mode)
 (global-set-key (kbd "<f6>") 'windresize)
-(global-set-key (kbd "<f7>") 'project-explorer-toggle)
+(global-set-key (kbd "<f7>") 'neotree-toggle)
+(global-set-key (kbd "<f8>") 'ecb-minor-mode)
+(global-set-key (kbd "<f9>") 'ecb-toggle-layout)
 (global-set-key (kbd "<f11>") 'dopemacs-toggle-fullscreen)
 (global-set-key (kbd "<f12>") 'sunrise)
 
@@ -706,7 +749,7 @@
 ;; (elpy-enable)
 ;; (delq 'flymake-mode elpy-default-minor-modes)
 (load-theme 'tsdh-light)
-
+(ecb-activate)
 
 
 
