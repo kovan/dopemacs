@@ -134,7 +134,6 @@
                        sequential-command
                        skewer-mode
                        slim-mode
-                       slime
                        smart-mode-line
                        smartparens
 					   sqlup-mode
@@ -162,16 +161,16 @@
   
   (require 'package)
 
-  (add-to-list 'package-archives '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
   (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/") t)
   (add-to-list 'package-archives '("SC"   . "http://joseito.republika.pl/sunrise-commander/") t)
 
   ;; activate all the packages (in particular autoloads)
   (setq load-prefer-newer t)
   (package-initialize)
-  (require 'auto-compile)
-  (auto-compile-on-load-mode)
-  (auto-compile-on-save-mode)
+;;  (require 'auto-compile)
+;;  (auto-compile-on-load-mode)
+;;  (auto-compile-on-save-mode)
   
   ;; fetch the list of packages available
   (unless package-archive-contents
