@@ -1,3 +1,5 @@
+Deprecated in favor of https://github.com/syl20bnr/spacemacs. Check it out!
+
 ![Image](../../blob/master/dopemacs.png?raw=true)
 ![Image](../../blob/master/dopemacs2.png?raw=true)
 
